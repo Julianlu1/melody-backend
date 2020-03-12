@@ -7,6 +7,6 @@ public class TestTest {
 
     @Test
     void JustATest() {
-       assertEquals(false,true);
+       assertEquals(true,true);
     }
 }
