@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class TestTest {
 
     @Test
-    void JustATest() {
-       assertEquals(true,true);
+    void test() {
+       assertEquals(false,true);
     }
 }
