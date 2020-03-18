@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import server.entity.Comment;
 import server.entity.SheetMusic;
 import server.repository.SheetMusicRepository;
 
@@ -25,15 +26,6 @@ public class SheetMusicController {
         return sheetMusicRepository.findAll();
     }
 
-//    @PostMapping(value = "/sheetmusic")
-//    public SheetMusic create(@RequestBody Map<String,String> body){
-//        String title = body.get("title");
-//        byte[] pdf = "".getBytes();
-//
-//        SheetMusic sheetMusic = new SheetMusic(title,"","","",pdf);
-//        return sheetMusic;
-//    }
-
     @PostMapping(value = "/sheetmusic")
     public SheetMusic create(@RequestParam("file") MultipartFile file, @RequestParam("title") String title, @RequestParam("componist") String componist, @RequestParam("key") String key, @RequestParam("instrument") String instrument) throws IOException {
         byte [] pdf = file.getBytes();
@@ -41,4 +33,5 @@ public class SheetMusicController {
         SheetMusic sheetMusic = new SheetMusic(title,componist,key,instrument,pdf);
         return sheetMusicRepository.save(sheetMusic);
     }
+
 }
