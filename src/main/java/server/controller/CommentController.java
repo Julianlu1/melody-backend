@@ -3,7 +3,9 @@ package server.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import server.entity.Comment;
+import server.entity.SheetMusic;
 import server.repository.CommentRepository;
+import server.repository.SheetMusicRepository;
 
 import java.util.List;
 import java.util.Map;
@@ -14,12 +16,16 @@ public class CommentController {
     @Autowired
     CommentRepository commentRepository;
 
-    @GetMapping("/sheetmusic/{sheetId}/comments")
-    public List<Comment> index(@PathVariable String sheetId){
-        int id =Integer.parseInt(sheetId);
-        // find by sheet id
-        return null;
-    }
+    @Autowired
+    SheetMusicRepository sheetMusicRepository;
+//
+//    @GetMapping("/sheetmusic/{sheetId}/comments")
+//    public List<Comment> index(@PathVariable String sheetId){
+//        int id =Integer.parseInt(sheetId);
+//        // find by sheet id
+//        List<Comment> comments = commentRepository.findBySheetMusic_sheetMusicId(id);
+//        return comments;
+//    }
 
     @PostMapping("/comments")
     public Comment create(@RequestBody Map<String,String> body){
@@ -28,7 +34,10 @@ public class CommentController {
         String title = body.get("title");
         String description = body.get("description");
         int score = Integer.parseInt(body.get("score"));
-        Comment comment = new Comment(sheetId,userId,title,description,score);
+
+        SheetMusic sheetMusic = sheetMusicRepository.findById(sheetId).orElse(null);
+
+        Comment comment = new Comment(sheetMusic,userId,title,description,score);
         return commentRepository.save(comment);
     }
 }

@@ -26,6 +26,13 @@ public class SheetMusicController {
         return sheetMusicRepository.findAll();
     }
 
+    @GetMapping("/sheetmusic/{id}")
+    public SheetMusic getById(@PathVariable String id){
+        int sheetId = Integer.parseInt(id);
+        SheetMusic sheetMusic = sheetMusicRepository.findById(sheetId).orElse(null);
+        return sheetMusic;
+    }
+
     @PostMapping(value = "/sheetmusic")
     public SheetMusic create(@RequestParam("file") MultipartFile file, @RequestParam("title") String title, @RequestParam("componist") String componist, @RequestParam("key") String key, @RequestParam("instrument") String instrument) throws IOException {
         byte [] pdf = file.getBytes();
@@ -33,5 +40,6 @@ public class SheetMusicController {
         SheetMusic sheetMusic = new SheetMusic(title,componist,key,instrument,pdf);
         return sheetMusicRepository.save(sheetMusic);
     }
+
 
 }

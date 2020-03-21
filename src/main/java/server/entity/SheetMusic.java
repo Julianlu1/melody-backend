@@ -3,6 +3,8 @@ package server.entity;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="sheet_music")
@@ -10,6 +12,7 @@ public class SheetMusic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
     private String title;
@@ -19,6 +22,11 @@ public class SheetMusic {
     private String key;
 
     private String instrument;
+
+    // Een sheetmusic heeft meerdere comments
+    // mappedBy = "sheetMusic" is de variabele naam in de Comment entity
+    @OneToMany(mappedBy = "sheetMusic")
+    List<Comment> comments = new ArrayList<>();
 
     @Lob
     @Type(type="org.hibernate.type.BinaryType")
@@ -81,5 +89,13 @@ public class SheetMusic {
 
     public void setPdf(byte[] pdf) {
         this.pdf = pdf;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }
