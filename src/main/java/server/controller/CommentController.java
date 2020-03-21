@@ -35,6 +35,8 @@ public class CommentController {
         String description = body.get("description");
         int score = Integer.parseInt(body.get("score"));
 
+        // Kleine bug hier
+        // sheetmusic heeft een lijst met comments, deze comments hebben weer een sheetmusic, en die sheetmusic heeft weer een lijst met comments.
         SheetMusic sheetMusic = sheetMusicRepository.findById(sheetId).orElse(null);
 
         Comment comment = new Comment(sheetMusic,userId,title,description,score);
