@@ -30,7 +30,6 @@ public class Comment {
     // Een comment hoort maar bij 1 sheetmusic
     // Relatie op basis van het sheet_music_id
     @ManyToOne
-    @JoinColumn(name="sheet_music_id", nullable = false)
     private SheetMusic sheetMusic;
 
     public Comment() {

@@ -24,8 +24,9 @@ public class SheetMusic {
     private String instrument;
 
     // Een sheetmusic heeft meerdere comments
-    // mappedBy = "sheetMusic" is de variabele naam in de Comment entity
-    @OneToMany(mappedBy = "sheetMusic")
+    // mappedBy = "sheetMusic" is de variabele naam in de Comment entity (mappedBy = "sheetMusic")
+    @OneToMany
+    @JoinColumn(name="sheet_music_id")
     List<Comment> comments = new ArrayList<>();
 
     @Lob
