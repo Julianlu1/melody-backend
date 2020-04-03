@@ -4,6 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import server.entity.SheetMusic;
 
+import java.util.List;
+
 @Repository
 public interface SheetMusicRepository extends JpaRepository<SheetMusic,Integer> {
+    List<SheetMusic> findByComponistAndKeyAndInstrument(String componist, String key, String instrument);
 }

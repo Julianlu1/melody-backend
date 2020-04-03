@@ -36,6 +36,14 @@ public class SheetMusic {
     public SheetMusic() {
     }
 
+    // Aparate constructor voor het filteren
+    // Filteren kan op componist, key en instrument
+    public SheetMusic(String componist, String key, String instrument){
+        this.componist = componist;
+        this.key = key;
+        this.instrument = instrument;
+    }
+
     public SheetMusic(String title, String componist, String key, String instrument, byte[] pdf) {
         this.title = title;
         this.componist = componist;
