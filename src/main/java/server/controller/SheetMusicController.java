@@ -62,8 +62,8 @@ public class SheetMusicController {
         String filePath = ResourceUtils.getFile("classpath:pdf").toString();
 
         URL s = SheetMusicController.class
-                .getClassLoader().getResource("pdf/test.pdf");
-        fileService.uploadFile(file,s);
+                .getClassLoader().getResource("pdf/" + filePath);
+        fileService.uploadFile(file,filePath);
 
 //
         byte [] pdf = file.getBytes();
@@ -71,23 +71,21 @@ public class SheetMusicController {
 //        // pdf uploaden naar resources/pdf
 //        // File path
 
+        SheetMusic sheetMusic = new SheetMusic(title,componist,key,instrument,fileName);
+        return sheetMusicRepository.save(sheetMusic);
+    }
 
-//        // Schrijven van bestand
-//        Files.write(Paths.get(Paths.get(filePath) + "/test.pdf"), pdf);
-//
-//        String webappRoot = servletContext.getRealPath("/");
-//        String relativeFolder = File.separator + "resources" + File.separator + "pdf" + File.separator;
-//        String filename = webappRoot + relativeFolder + file.getOriginalFilename();
-//
-//        file.transferTo(new File(filePath + "To_the_Moon_For_River_Johnnys_Version (1).pdf"));   //Here I Added
-//
-//
+    @DeleteMapping("/sheetmusic/{id}")
+    public String deleteById(@PathVariable String id){
+        int sheetId = Integer.parseInt(id);
+        sheetMusicRepository.deleteById(sheetId);
+        return "";
+    }
 
-
-        // pdf string opslaan in database met de juiste locatie
-        SheetMusic sheetMusic = new SheetMusic(title,componist,key,instrument,pdf);
-        return null;
-//        return sheetMusicRepository.save(sheetMusic);
+    @DeleteMapping("/sheetmusic/all")
+    public String deleteById(){
+        sheetMusicRepository.deleteAll();
+        return "Deleted all";
     }
 
     @GetMapping("sheetmusic/getFaded")

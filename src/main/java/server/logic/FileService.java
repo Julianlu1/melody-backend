@@ -17,7 +17,7 @@ public class FileService {
 //    @Value("${file.upload.dir:${user.home}}")
 //    public String uploadDir;
 
-    public void uploadFile(MultipartFile file, URL uploadDir) {
+    public void uploadFile(MultipartFile file, String uploadDir) {
 
         try {
             Path copyLocation = Paths

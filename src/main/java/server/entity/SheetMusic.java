@@ -29,9 +29,9 @@ public class SheetMusic {
     @JoinColumn(name="sheet_music_id")
     List<Comment> comments = new ArrayList<>();
 
-    @Lob
-    @Type(type="org.hibernate.type.BinaryType")
-    private byte[] pdf;
+//    @Lob
+//    @Type(type="org.hibernate.type.BinaryType")
+    private String pdf;
 
     public SheetMusic() {
     }
@@ -44,7 +44,7 @@ public class SheetMusic {
         this.instrument = instrument;
     }
 
-    public SheetMusic(String title, String componist, String key, String instrument, byte[] pdf) {
+    public SheetMusic(String title, String componist, String key, String instrument, String pdf) {
         this.title = title;
         this.componist = componist;
         this.key = key;
@@ -92,11 +92,11 @@ public class SheetMusic {
         this.instrument = instrument;
     }
 
-    public byte[] getPdf() {
+    public String getPdf() {
         return pdf;
     }
 
-    public void setPdf(byte[] pdf) {
+    public void setPdf(String pdf) {
         this.pdf = pdf;
     }
 
