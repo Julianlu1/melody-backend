@@ -36,6 +36,8 @@ public class SheetMusicController {
     private ResourceLoader resourceLoader;
 
     @Autowired
+    ServletContext context;
+    @Autowired
     FileService fileService;
 
     @Autowired
@@ -61,15 +63,13 @@ public class SheetMusicController {
         String fileName = file.getOriginalFilename();
         String filePath = ResourceUtils.getFile("classpath:pdf").toString();
 
-        URL s = SheetMusicController.class
-                .getClassLoader().getResource("pdf/" + filePath);
-        fileService.uploadFile(file,filePath);
+        String relativeWebPath = "/resources";
+        String absoluteFilePath = context.getRealPath(relativeWebPath);
 
-//
-        byte [] pdf = file.getBytes();
+        fileService.uploadFile(file,absoluteFilePath);
+//        byte [] pdf = file.getBytes();
 //
 //        // pdf uploaden naar resources/pdf
-//        // File path
 
         SheetMusic sheetMusic = new SheetMusic(title,componist,key,instrument,fileName);
         return sheetMusicRepository.save(sheetMusic);
