@@ -1,0 +1,14 @@
+
+Zsquid:UselessImportCheck"/Remove this unused import 'java.nio.file.Path'.(×²êÂ8åÚš¨•.
+squid:S1488r"cImmediately return this expression instead of assigning it to the temporary variable "sheetMusics".(Ü™ä8åÚš¨•.
+Zsquid:S1854E"7Remove this useless assignment to local variable "pdf".(Æ²Ñİøÿÿÿÿ8åÚš¨•.
+[squid:UselessImportCheck"0Remove this unused import 'java.nio.file.Files'.(‚ƒü8åÚš¨•.
+[squid:UselessImportCheck"0Remove this unused import 'java.nio.file.Paths'.(áè°¯8åÚš¨•.
+Xsquid:S1854@"5Remove this useless assignment to local variable "s".(ÁñÒÄıÿÿÿÿ8åÚš¨•.
+Isquid:S1481@"&Remove this unused "s" local variable.(ÁñÒÄıÿÿÿÿ8åÚš¨•.
+€squid:S14887"bImmediately return this expression instead of assigning it to the temporary variable "sheetMusic".(°µÖâ8åÚš¨•.
+zsquid:S1488a"]Immediately return this expression instead of assigning it to the temporary variable "fiile".(œ‡!8åÚš¨•.
+\squid:S1854`"9Remove this useless assignment to local variable "input".(ŸÄûêüÿÿÿÿ8åÚš¨•.
+jsquid:UselessImportCheck":Remove this unused import 'java.io.FileNotFoundException'.(·î™ùÿÿÿÿ8åÚš¨•.
+Msquid:S1481`"*Remove this unused "input" local variable.(ŸÄûêüÿÿÿÿ8åÚš¨•.
+Ksquid:S1481E"(Remove this unused "pdf" local variable.(Æ²Ñİøÿÿÿÿ8åÚš¨•.
