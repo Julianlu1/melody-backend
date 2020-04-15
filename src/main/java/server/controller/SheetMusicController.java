@@ -66,7 +66,7 @@ public class SheetMusicController {
         String relativeWebPath = "/resources";
         String absoluteFilePath = context.getRealPath(relativeWebPath);
 
-        fileService.uploadFile(file,absoluteFilePath);
+        fileService.uploadFile(file,filePath);
 //        byte [] pdf = file.getBytes();
 //
 //        // pdf uploaden naar resources/pdf

@@ -47,3 +47,5 @@ b
 2src/main/java/server/config/WebSecurityConfig.java,d\2\d2346d1d9560e4f01dc768038840e1c79b0eef24
 p
 @src/main/java/server/controller/JwtAuthenticationController.java,d\f\df3390ca44e4b8eeb535b3ce219873e4466b6b71
+U
+%target/classes/application.properties,b\b\bb173f9557479135e0f1bcd9c6c5f7b4ae5f77e8

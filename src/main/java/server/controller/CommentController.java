@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import server.entity.Comment;
 import server.entity.SheetMusic;
+import server.logic.JwtService;
 import server.repository.CommentRepository;
 import server.repository.SheetMusicRepository;
 
@@ -12,6 +13,9 @@ import java.util.Map;
 
 @RestController
 public class CommentController {
+
+    @Autowired
+    JwtService jwtService;
 
     @Autowired
     CommentRepository commentRepository;
@@ -28,7 +32,9 @@ public class CommentController {
 //    }
 
     @PostMapping("/comments")
-    public Comment create(@RequestBody Map<String,String> body){
+    public Comment create(@RequestHeader (name="Authorization") String token ,@RequestBody Map<String,String> body){
+        jwtService.decodeJwt(token);
+
         int sheetId = Integer.parseInt(body.get("sheetId"));
         int userId = Integer.parseInt(body.get("userId"));
         String title = body.get("title");
