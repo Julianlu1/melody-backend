@@ -33,10 +33,12 @@ public class CommentController {
 
     @PostMapping("/comments")
     public Comment create(@RequestHeader (name="Authorization") String token ,@RequestBody Map<String,String> body){
+
+        // id krijgen van de user uit de token
         jwtService.decodeJwt(token);
+        int userId = jwtService.getIdFromToken();
 
         int sheetId = Integer.parseInt(body.get("sheetId"));
-        int userId = Integer.parseInt(body.get("userId"));
         String title = body.get("title");
         String description = body.get("description");
         int score = Integer.parseInt(body.get("score"));

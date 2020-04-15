@@ -1,9 +1,14 @@
 package server.logic;
+import com.google.gson.Gson;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.stereotype.Service;
+import server.model.JwtDecode;
 
 @Service
 public class JwtService {
+    Gson gson = new Gson();
+
+    private JwtDecode jwtDecode;
 
     public void decodeJwt(String jwtToken){
         String token = jwtToken.replace("Bearer ", "");
@@ -22,5 +27,13 @@ public class JwtService {
         System.out.println("~~~~~~~~~ JWT Body ~~~~~~~");
         String body = new String(base64Url.decode(base64EncodedBody));
         System.out.println("JWT Body : "+body);
+        System.out.println("JWT Body : "+body);
+
+        // Hierin zitten de belangrijke properties van de token
+        jwtDecode = gson.fromJson(body,JwtDecode.class );
+    }
+
+    public int getIdFromToken(){
+        return jwtDecode.getId();
     }
 }

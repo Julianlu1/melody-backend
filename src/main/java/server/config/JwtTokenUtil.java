@@ -3,9 +3,12 @@ package server.config;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import server.entity.User;
+import server.service.JwtUserDetailsService;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,6 +19,11 @@ import java.util.function.Function;
 // Voor het creeëren en valideren van webtokens
 @Component
 public class JwtTokenUtil implements Serializable {
+
+    // Om de user op te halen en het ID van de user in een claim te zetten in de JWT
+    @Autowired
+    private JwtUserDetailsService userDetailsService;
+
 
     private static final long serialVersionUID = -2550185165626007488L;
     public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
@@ -53,6 +61,8 @@ public class JwtTokenUtil implements Serializable {
 //3. According to JWS Compact Serialization(https://tools.ietf.org/html/draft-ietf-jose-json-web-signature-41#section-3.1)
 //   compaction of the JWT to a URL-safe string
     private String doGenerateToken(Map<String, Object> claims, String subject) {
+        User user = userDetailsService.findUser(subject);
+        claims.put("id",user.getId());
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
                 .signWith(SignatureAlgorithm.HS512, secret).compact();

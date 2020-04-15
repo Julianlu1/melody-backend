@@ -37,4 +37,8 @@ public class JwtUserDetailsService implements UserDetailsService {
         user.setPassword(bcryptEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
+
+    public server.entity.User findUser(String username){
+        return userRepository.findByUsername(username);
+    }
 }
