@@ -59,7 +59,7 @@ public class SheetMusicController {
     @PostMapping(value = "/sheetmusic")
     public SheetMusic create(HttpServletRequest request, @RequestParam("file") MultipartFile file, @RequestParam("title") String title, @RequestParam("componist") String componist, @RequestParam("key") String key, @RequestParam("instrument") String instrument) throws IOException {
 //        final String imagePath = "melody-backend/src/main/resources/static/"; //path
-        String saveDirectory=request.getSession().getServletContext().getRealPath("/")+"images\\";//to save to images folder
+        String saveDirectory=request.getSession().getServletContext().getRealPath("/")+"static\\";//to save to images folder
         String fileName = file.getOriginalFilename();//getting file name
         System.out.println("directory with file name: " + saveDirectory+fileName);
         file.transferTo(new File(saveDirectory + fileName));
