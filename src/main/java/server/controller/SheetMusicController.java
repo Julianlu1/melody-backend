@@ -60,34 +60,19 @@ public class SheetMusicController {
 
     @PostMapping(value = "/sheetmusic")
     public SheetMusic create(HttpServletRequest request, @RequestParam("file") MultipartFile file, @RequestParam("title") String title, @RequestParam("componist") String componist, @RequestParam("key") String key, @RequestParam("instrument") String instrument) throws IOException {
-//        final String imagePath = "melody-backend/src/main/resources/static/"; //path
-
-        ServletContext sContext = request.getServletContext();
-        URL sqlScriptUrl = sContext
-                .getClassLoader().getResource("static/");
-
-        String saveDirectory = sqlScriptUrl.getPath();
-//        String saveDirectory = servletContext.getRealPath("resources/static/");
-        //String saveDirectory=request.getSession().getServletContext().getRealPath("/")+"static\\";//to save to images folder
+//        String saveDirectory=request.getSession().getServletContext().getRealPath("/")+"static\\";//to save to images folder
 //        fileService.uploadFile(file,saveDirectory);
 //        String fileName = file.getOriginalFilename();//getting file name
 //        System.out.println("directory with file name: " + saveDirectory+fileName);
 //        file.transferTo(new File(saveDirectory + fileName));
 
         String filePath = ResourceUtils.getFile("classpath:static").toString();
+        ClassLoader classLoader = getClass().getClassLoader();
+        File filee = new File(classLoader.getResource("static").getFile());
+        System.out.println(filee.getAbsolutePath());
+//        URL s = ResourceUtils.getURL("classpath:static/");
+//        String path  = s.getPath();
         fileService.uploadFile(file,filePath);
-
-
-
-
-
-        //        String fileName = file.getOriginalFilename();
-//
-
-//        fileService.uploadFile(file,relativeWebPath);
-////        byte [] pdf = file.getBytes();
-//
-//        // pdf uploaden naar resources/pdf
 
         SheetMusic sheetMusic = new SheetMusic(title,componist,key,instrument,file.getOriginalFilename());
         return sheetMusicRepository.save(sheetMusic);
