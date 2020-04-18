@@ -22,6 +22,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.http.HttpServletRequest;
+import java.awt.*;
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -63,11 +64,16 @@ public class SheetMusicController {
 
     @PostMapping(value = "/sheetmusic")
     public SheetMusic create(@RequestParam("file") MultipartFile file, @RequestParam("title") String title, @RequestParam("componist") String componist, @RequestParam("key") String key, @RequestParam("instrument") String instrument) throws IOException {
-        ClassPathResource cpr = new ClassPathResource("static");
-        InputStream is = cpr.getInputStream();
-        String result = IOUtils.toString(is);
-        fileService.uploadFile(file,result);
-        System.out.println(result);
+//        ClassPathResource cpr = new ClassPathResource("static");
+//        InputStream is = cpr.getInputStream();
+//        String result = IOUtils.toString(is);
+//        fileService.uploadFile(file,result);
+
+        Resource resource = resourceLoader.getResource("classpath:static");
+        InputStream inputStream = resource.getInputStream();
+        String result2 = IOUtils.toString(inputStream);
+        fileService.uploadFile(file,result2);
+
         SheetMusic sheetMusic = new SheetMusic(title,componist,key,instrument,file.getOriginalFilename());
         return sheetMusicRepository.save(sheetMusic);
 //        Uploads to target/static
