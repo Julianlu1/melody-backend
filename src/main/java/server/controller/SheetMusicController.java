@@ -17,10 +17,8 @@ import server.logic.FileService;
 import server.repository.SheetMusicRepository;
 
 import javax.servlet.ServletContext;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import javax.servlet.http.HttpServletRequest;
+import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -59,19 +57,25 @@ public class SheetMusicController {
     }
 
     @PostMapping(value = "/sheetmusic")
-    public SheetMusic create(@RequestParam("file") MultipartFile file, @RequestParam("title") String title, @RequestParam("componist") String componist, @RequestParam("key") String key, @RequestParam("instrument") String instrument) throws IOException {
-        String fileName = file.getOriginalFilename();
-        String filePath = ResourceUtils.getFile("classpath:pdf").toString();
+    public SheetMusic create(HttpServletRequest request, @RequestParam("file") MultipartFile file, @RequestParam("title") String title, @RequestParam("componist") String componist, @RequestParam("key") String key, @RequestParam("instrument") String instrument) throws IOException {
+//        final String imagePath = "melody-backend/src/main/resources/static/"; //path
+        String saveDirectory=request.getSession().getServletContext().getRealPath("/")+"images\\";//to save to images folder
+        String fileName = file.getOriginalFilename();//getting file name
+        System.out.println("directory with file name: " + saveDirectory+fileName);
+        file.transferTo(new File(saveDirectory + fileName));
 
-        String relativeWebPath = "/resources";
-        String absoluteFilePath = context.getRealPath(relativeWebPath);
-
-        fileService.uploadFile(file,filePath);
-//        byte [] pdf = file.getBytes();
+        //        String fileName = file.getOriginalFilename();
+//        String filePath = ResourceUtils.getFile("classpath:static").toString();
+//
+//        String relativeWebPath = "/static/upload";
+//        String absoluteFilePath = context.getRealPath(relativeWebPath);
+//
+//        fileService.uploadFile(file,relativeWebPath);
+////        byte [] pdf = file.getBytes();
 //
 //        // pdf uploaden naar resources/pdf
 
-        SheetMusic sheetMusic = new SheetMusic(title,componist,key,instrument,fileName);
+        SheetMusic sheetMusic = new SheetMusic(title,componist,key,instrument,file.getOriginalFilename());
         return sheetMusicRepository.save(sheetMusic);
     }
 
