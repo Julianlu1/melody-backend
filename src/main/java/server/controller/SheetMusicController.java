@@ -17,6 +17,8 @@ import server.logic.FileService;
 import server.repository.SheetMusicRepository;
 
 import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.net.URL;
@@ -59,17 +61,29 @@ public class SheetMusicController {
     @PostMapping(value = "/sheetmusic")
     public SheetMusic create(HttpServletRequest request, @RequestParam("file") MultipartFile file, @RequestParam("title") String title, @RequestParam("componist") String componist, @RequestParam("key") String key, @RequestParam("instrument") String instrument) throws IOException {
 //        final String imagePath = "melody-backend/src/main/resources/static/"; //path
-        String saveDirectory=request.getSession().getServletContext().getRealPath("/")+"static\\";//to save to images folder
-        String fileName = file.getOriginalFilename();//getting file name
-        System.out.println("directory with file name: " + saveDirectory+fileName);
-        file.transferTo(new File(saveDirectory + fileName));
+
+        ServletContext sContext = request.getServletContext();
+        URL sqlScriptUrl = sContext
+                .getClassLoader().getResource("static/");
+
+        String saveDirectory = sqlScriptUrl.getPath();
+//        String saveDirectory = servletContext.getRealPath("resources/static/");
+        //String saveDirectory=request.getSession().getServletContext().getRealPath("/")+"static\\";//to save to images folder
+//        fileService.uploadFile(file,saveDirectory);
+//        String fileName = file.getOriginalFilename();//getting file name
+//        System.out.println("directory with file name: " + saveDirectory+fileName);
+//        file.transferTo(new File(saveDirectory + fileName));
+
+        String filePath = ResourceUtils.getFile("classpath:static").toString();
+        fileService.uploadFile(file,filePath);
+
+
+
+
 
         //        String fileName = file.getOriginalFilename();
-//        String filePath = ResourceUtils.getFile("classpath:static").toString();
 //
-//        String relativeWebPath = "/static/upload";
-//        String absoluteFilePath = context.getRealPath(relativeWebPath);
-//
+
 //        fileService.uploadFile(file,relativeWebPath);
 ////        byte [] pdf = file.getBytes();
 //
