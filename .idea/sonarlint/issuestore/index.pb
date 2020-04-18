@@ -49,3 +49,7 @@ p
 @src/main/java/server/controller/JwtAuthenticationController.java,d\f\df3390ca44e4b8eeb535b3ce219873e4466b6b71
 U
 %target/classes/application.properties,b\b\bb173f9557479135e0f1bcd9c6c5f7b4ae5f77e8
+Z
+*src/main/java/server/logic/JwtService.java,7\2\72bf64dfb91398df447e80d718a084bcc0b592e8
+Y
+)src/main/java/server/model/JwtDecode.java,9\6\96ae09848fa5744191d9ee0ac38cf9a4dd5d6172
