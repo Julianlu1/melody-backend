@@ -64,15 +64,15 @@ public class SheetMusicController {
 
     @PostMapping(value = "/sheetmusic")
     public SheetMusic create(@RequestParam("file") MultipartFile file, @RequestParam("title") String title, @RequestParam("componist") String componist, @RequestParam("key") String key, @RequestParam("instrument") String instrument) throws IOException {
-//        ClassPathResource cpr = new ClassPathResource("static");
-//        InputStream is = cpr.getInputStream();
-//        String result = IOUtils.toString(is);
-//        fileService.uploadFile(file,result);
+        ClassPathResource cpr = new ClassPathResource("static");
+        InputStream is = cpr.getInputStream();
+        String result = IOUtils.toString(is);
+        fileService.uploadFile(file,result);
 
-        Resource resource = resourceLoader.getResource("classpath:static");
-        InputStream inputStream = resource.getInputStream();
-        String result2 = IOUtils.toString(inputStream);
-        fileService.uploadFile(file,result2);
+//        Resource resource = resourceLoader.getResource("classpath:static");
+//        InputStream inputStream = resource.getInputStream();
+//        String result2 = IOUtils.toString(inputStream);
+//        fileService.uploadFile(file,result2);
 
         SheetMusic sheetMusic = new SheetMusic(title,componist,key,instrument,file.getOriginalFilename());
         return sheetMusicRepository.save(sheetMusic);
