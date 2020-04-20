@@ -29,7 +29,6 @@ public class MainApplicationClass implements WebMvcConfigurer {
                         .allowCredentials(true);
             }
         };
-
     }
 
     @Override

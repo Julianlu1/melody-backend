@@ -66,7 +66,7 @@ public class SheetMusicController {
     @PostMapping(value = "/sheetmusic")
     public SheetMusic create(@RequestParam("file") MultipartFile file, @RequestParam("title") String title, @RequestParam("componist") String componist, @RequestParam("key") String key, @RequestParam("instrument") String instrument) throws IOException {
 //        ClassPathResource cpr = new ClassPathResource("static");
-        String path = new File(".").getCanonicalPath() + "/src/main/webapp/WEB-INF/images/";
+            String path = new File(".").getCanonicalPath() + "/src/main/webapp/WEB-INF/images/";
         URL test = this.getClass().getProtectionDomain().getCodeSource().getLocation();
 
         fileService.uploadFile(file,path);
