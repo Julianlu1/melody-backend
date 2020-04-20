@@ -29,6 +29,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Map;
 
@@ -64,10 +65,18 @@ public class SheetMusicController {
 
     @PostMapping(value = "/sheetmusic")
     public SheetMusic create(@RequestParam("file") MultipartFile file, @RequestParam("title") String title, @RequestParam("componist") String componist, @RequestParam("key") String key, @RequestParam("instrument") String instrument) throws IOException {
-        ClassPathResource cpr = new ClassPathResource("static");
-        InputStream is = cpr.getInputStream();
-        String result = IOUtils.toString(is);
-        fileService.uploadFile(file,result);
+//        ClassPathResource cpr = new ClassPathResource("static");
+        String path = new File(".").getCanonicalPath() + "/src/main/webapp/WEB-INF/images/";
+        URL test = this.getClass().getProtectionDomain().getCodeSource().getLocation();
+
+        fileService.uploadFile(file,path);
+//        InputStream is = file.getInputStream();
+//        File fileToSave = new File("webapp/WEB-INF/images/" + file.getOriginalFilename());
+//
+//        Files.copy(is, fileToSave.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+//        String result = IOUtils.toString(is);
+//        fileService.uploadFile(file,result);
 
 //        Resource resource = resourceLoader.getResource("classpath:static");
 //        InputStream inputStream = resource.getInputStream();
