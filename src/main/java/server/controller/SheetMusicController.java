@@ -37,8 +37,6 @@ public class SheetMusicController {
 
     @Autowired
     ServletContext context;
-    @Autowired
-    FileService fileService;
 
     @Autowired
     ServletContext servletContext;
@@ -73,13 +71,17 @@ public class SheetMusicController {
     }
 
     @PostMapping(value = "/sheetmusic")
-    public SheetMusic create(@RequestParam("file") MultipartFile file, @RequestParam("title") String title, @RequestParam("componist") String componist, @RequestParam("key") String key, @RequestParam("instrument") String instrument) throws IOException {
-        String path = new File(".").getCanonicalPath() + "/src/main/webapp/WEB-INF/images/";
-        fileService.uploadFile(file,path);
+    public ResponseEntity create(@RequestParam("file") MultipartFile file, @RequestParam("title") String title, @RequestParam("componist") String componist, @RequestParam("key") String key, @RequestParam("instrument") String instrument) throws IOException {
 
-        SheetMusic sheetMusic = new SheetMusic(title,componist,key,instrument,file.getOriginalFilename());
-        return sheetMusicRepository.save(sheetMusic);
-//        Uploads to target/static
+        try{
+            SheetMusic sheetMusic = sheetMusicLogic.addSheetMusic(title,componist,key,instrument,file.getOriginalFilename(),file);
+            return ResponseEntity.ok(sheetMusic);
+        }catch(Exception e){
+            GeneralException ex = new GeneralException("Oeps, er gaat iets fout");
+            String jsonString = gson.toJson(ex);
+            return new ResponseEntity(jsonString,HttpStatus.BAD_REQUEST);
+        }
+        //        Uploads to target/static
 //        String filePath = ResourceUtils.getFile("classpath:static").toString();
 //        fileService.uploadFile(file,filePath);
     }
@@ -97,16 +99,6 @@ public class SheetMusicController {
         return "Deleted all";
     }
 
-    @GetMapping("sheetmusic/getFaded")
-    public File getSheet() throws IOException {
-
-
-        Resource resource = new ClassPathResource("pdf/Faded.pdf");
-        InputStream input = resource.getInputStream();
-        File fiile = resource.getFile();
-
-        return fiile;
-    }
     @GetMapping("/sheetmusic/filter")
     public List<SheetMusic> getSheetMusicByFilter(@RequestBody Map<String,String> body){
         String componist = body.get("componist");
