@@ -4,11 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import server.entity.Comment;
 import server.entity.SheetMusic;
+import server.logic.CommentLogic;
 import server.logic.JwtService;
 import server.repository.CommentRepository;
 import server.repository.SheetMusicRepository;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -16,6 +16,9 @@ public class CommentController {
 
     @Autowired
     JwtService jwtService;
+
+    @Autowired
+    CommentLogic commentLogic;
 
     @Autowired
     CommentRepository commentRepository;
@@ -33,7 +36,6 @@ public class CommentController {
 
     @PostMapping("/comments")
     public Comment create(@RequestHeader (name="Authorization") String token ,@RequestBody Map<String,String> body){
-
         // id krijgen van de user uit de token
         jwtService.decodeJwt(token);
         int userId = jwtService.getIdFromToken();
@@ -46,8 +48,8 @@ public class CommentController {
         // Kleine bug hier
         // sheetmusic heeft een lijst met comments, deze comments hebben weer een sheetmusic, en die sheetmusic heeft weer een lijst met comments.
         SheetMusic sheetMusic = sheetMusicRepository.findById(sheetId).orElse(null);
+        Comment comment = commentLogic.AddComment(sheetMusic,userId,title,description,score);
 
-        Comment comment = new Comment(sheetMusic,userId,title,description,score);
-        return commentRepository.save(comment);
+        return comment;
     }
 }

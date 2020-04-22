@@ -1,2 +1,3 @@
 
-‘squid:UselessImportCheck"fRemove this unused import 'org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter'.(Ùõ’ß8Ã¸.
+‘squid:UselessImportCheck
+"fRemove this unused import 'org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter'.(Ùõ’ß8Ã¸.

@@ -1,44 +1,39 @@
 package server.controller;
 
-
-import org.apache.commons.io.IOUtils;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.util.ResourceUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
+import server.GeneralException;
 import server.entity.SheetMusic;
 import server.logic.FileService;
+import server.logic.SheetMusicLogic;
 import server.repository.SheetMusicRepository;
-
 import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-import javax.servlet.http.HttpServletRequest;
-import java.awt.*;
 import java.io.*;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.exact;
 
 @RestController
 public class SheetMusicController {
     @Autowired
+    private Gson gson;
+    @Autowired
     private ResourceLoader resourceLoader;
+
+    @Autowired
+    private SheetMusicLogic sheetMusicLogic;
 
     @Autowired
     ServletContext context;
@@ -52,43 +47,41 @@ public class SheetMusicController {
     SheetMusicRepository sheetMusicRepository;
 
     @GetMapping("/sheetmusic")
-    public List<SheetMusic> index(){
-        return sheetMusicRepository.findAll();
+    public ResponseEntity index(){
+        try{
+            List<SheetMusic> sheetMusics = sheetMusicLogic.findAll();
+            return ResponseEntity.ok(sheetMusics);
+        }catch(Exception e){
+            GeneralException ex = new GeneralException("Oeps, er gaat iets fout");
+            String jsonString = gson.toJson(ex);
+            return new ResponseEntity<>(jsonString,HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/sheetmusic/{id}")
-    public SheetMusic getById(@PathVariable String id){
+    public ResponseEntity getById(@PathVariable String id){
         int sheetId = Integer.parseInt(id);
-        SheetMusic sheetMusic = sheetMusicRepository.findById(sheetId).orElse(null);
-        return sheetMusic;
+
+        try{
+            Optional<SheetMusic> sheetMusic2 = sheetMusicLogic.findById(sheetId);
+            return ResponseEntity.ok(sheetMusic2);
+        }catch(Exception e){
+            GeneralException ex = new GeneralException("Oeps, er gaat iets fout");
+            String jsonString = gson.toJson(ex);
+            return new ResponseEntity(jsonString,HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping(value = "/sheetmusic")
     public SheetMusic create(@RequestParam("file") MultipartFile file, @RequestParam("title") String title, @RequestParam("componist") String componist, @RequestParam("key") String key, @RequestParam("instrument") String instrument) throws IOException {
-//        ClassPathResource cpr = new ClassPathResource("static");
-            String path = new File(".").getCanonicalPath() + "/src/main/webapp/WEB-INF/images/";
-        URL test = this.getClass().getProtectionDomain().getCodeSource().getLocation();
-
+        String path = new File(".").getCanonicalPath() + "/src/main/webapp/WEB-INF/images/";
         fileService.uploadFile(file,path);
-//        InputStream is = file.getInputStream();
-//        File fileToSave = new File("webapp/WEB-INF/images/" + file.getOriginalFilename());
-//
-//        Files.copy(is, fileToSave.toPath(), StandardCopyOption.REPLACE_EXISTING);
-
-//        String result = IOUtils.toString(is);
-//        fileService.uploadFile(file,result);
-
-//        Resource resource = resourceLoader.getResource("classpath:static");
-//        InputStream inputStream = resource.getInputStream();
-//        String result2 = IOUtils.toString(inputStream);
-//        fileService.uploadFile(file,result2);
 
         SheetMusic sheetMusic = new SheetMusic(title,componist,key,instrument,file.getOriginalFilename());
         return sheetMusicRepository.save(sheetMusic);
 //        Uploads to target/static
 //        String filePath = ResourceUtils.getFile("classpath:static").toString();
 //        fileService.uploadFile(file,filePath);
-
     }
 
     @DeleteMapping("/sheetmusic/{id}")
