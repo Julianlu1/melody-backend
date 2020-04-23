@@ -30,8 +30,12 @@ public class FileService {
         }
     }
 
-    public void upload(MultipartFile file, String path) throws Exception {
+    public void deleteFile(String filePath){
+        File file = new File(filePath);
+        file.delete();
+    }
 
+    public void upload(MultipartFile file, String path) throws Exception {
         if (file.isEmpty()) {
             throw new Exception("Failed to store empty file");
         }

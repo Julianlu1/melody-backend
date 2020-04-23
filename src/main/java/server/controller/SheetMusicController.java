@@ -2,8 +2,6 @@ package server.controller;
 
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -13,24 +11,21 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import server.GeneralException;
 import server.entity.SheetMusic;
-import server.logic.FileService;
 import server.logic.SheetMusicLogic;
 import server.repository.SheetMusicRepository;
 import javax.servlet.ServletContext;
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.exact;
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.endsWith;
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.startsWith;
 
 @RestController
 public class SheetMusicController {
     @Autowired
     private Gson gson;
-    @Autowired
-    private ResourceLoader resourceLoader;
 
     @Autowired
     private SheetMusicLogic sheetMusicLogic;
@@ -61,7 +56,7 @@ public class SheetMusicController {
         int sheetId = Integer.parseInt(id);
 
         try{
-            Optional<SheetMusic> sheetMusic2 = sheetMusicLogic.findById(sheetId);
+            SheetMusic sheetMusic2 = sheetMusicLogic.findById(sheetId);
             return ResponseEntity.ok(sheetMusic2);
         }catch(Exception e){
             GeneralException ex = new GeneralException("Oeps, er gaat iets fout");
@@ -87,34 +82,51 @@ public class SheetMusicController {
     }
 
     @DeleteMapping("/sheetmusic/{id}")
-    public String deleteById(@PathVariable String id){
+    public ResponseEntity deleteById(@PathVariable String id){
         int sheetId = Integer.parseInt(id);
-        sheetMusicRepository.deleteById(sheetId);
-        return "";
+        try{
+            sheetMusicLogic.deleteById(sheetId);
+            return ResponseEntity.ok("deleted");
+        }catch(Exception e){
+            GeneralException ex = new GeneralException("Oeps, er gaat iets fout");
+            String jsonString = gson.toJson(ex);
+            return new ResponseEntity(jsonString,HttpStatus.BAD_REQUEST);
+        }
     }
 
-    @DeleteMapping("/sheetmusic/all")
-    public String deleteById(){
-        sheetMusicRepository.deleteAll();
-        return "Deleted all";
+    @DeleteMapping("/sheetmusic/")
+    public ResponseEntity deleteAll(){
+        try{
+            sheetMusicLogic.deleteAll();
+            return ResponseEntity.ok("Deleted all");
+        }catch(Exception e){
+            GeneralException ex = new GeneralException("Oeps, er gaat iets fout");
+            String jsonString = gson.toJson(ex);
+            return new ResponseEntity(jsonString,HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/sheetmusic/filter")
-    public List<SheetMusic> getSheetMusicByFilter(@RequestBody Map<String,String> body){
+    public ResponseEntity findSheetMusicByFilter(@RequestBody Map<String,String> body){
         String componist = body.get("componist");
         String key = body.get("key");
         String instrument = body.get("instrument");
 
-        SheetMusic sheetMusic = new SheetMusic(componist,key,instrument);
-        ExampleMatcher matcher = ExampleMatcher.matching()
-                .withMatcher("componist", new ExampleMatcher.GenericPropertyMatcher().exact())
-                .withMatcher("key",new ExampleMatcher.GenericPropertyMatcher().exact())
-                .withMatcher("instrument",new ExampleMatcher.GenericPropertyMatcher().exact());
-
-        Example<SheetMusic> example = Example.of(sheetMusic, matcher);
-        List<SheetMusic> sheetMusics = sheetMusicRepository.findAll(example);
-        return sheetMusics;
+        try{
+            List<SheetMusic> sheetMusics = sheetMusicLogic.findSheetMusicByFilter(componist,key,instrument);
+            return ResponseEntity.ok(sheetMusics);
+        }catch(Exception e){
+            GeneralException ex = new GeneralException("Oeps, er gaat iets fout");
+            String jsonString = gson.toJson(ex);
+            return new ResponseEntity(jsonString,HttpStatus.BAD_REQUEST);
+        }
+//        ExampleMatcher matcher = ExampleMatcher.matching()
+//                .withMatcher("componist", new ExampleMatcher.GenericPropertyMatcher().exact())
+//                .withMatcher("key",new ExampleMatcher.GenericPropertyMatcher().exact())
+//                .withMatcher("instrument",new ExampleMatcher.GenericPropertyMatcher().exact())
+//                .withIncludeNullValues();
+//
+//        Example<SheetMusic> example = Example.of(sheetMusic, matcher);
     }
-
 
 }

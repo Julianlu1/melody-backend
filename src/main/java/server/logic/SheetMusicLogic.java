@@ -1,6 +1,8 @@
 package server.logic;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import server.entity.SheetMusic;
@@ -19,13 +21,12 @@ public class SheetMusicLogic {
     @Autowired
     FileService fileService;
 
-
     public List<SheetMusic> findAll(){
         return sheetMusicRepository.findAll();
     }
 
-    public Optional<SheetMusic> findById(int id){
-        return sheetMusicRepository.findById(id);
+    public SheetMusic findById(int id){
+        return sheetMusicRepository.findById(id).orElse(null);
     }
 
     public SheetMusic addSheetMusic(String title, String componist, String key, String instrument, String fileName, MultipartFile file) throws IOException {
@@ -41,5 +42,38 @@ public class SheetMusicLogic {
 
         // Returnen
         return sheetMusic;
+    }
+
+    public List<SheetMusic> findSheetMusicByFilter(String componist, String key, String instrument){
+        SheetMusic sheetMusic = new SheetMusic(componist,key,instrument);
+        Example<SheetMusic> employeeExample = Example.of(sheetMusic, ExampleMatcher.matching()
+                .withIgnorePaths("id")
+                .withIgnorePaths("title")
+                .withIgnorePaths("pdf")
+                .withIgnorePaths("comments"));
+
+        List<SheetMusic> sheetMusics = sheetMusicRepository.findAll(employeeExample);
+        return sheetMusics;
+    }
+
+    public void deleteById(int id) throws IOException {
+        SheetMusic sheetMusic = findById(id);
+        String filePath = new File(".").getCanonicalPath() + "/src/main/webapp/WEB-INF/images/" + sheetMusic.getPdf();
+
+        fileService.deleteFile(filePath);
+        sheetMusicRepository.deleteById(id);
+    }
+    public void deleteAll(){
+        List<SheetMusic> sheetMusics = findAll();
+        sheetMusics.forEach(sheetMusic -> {
+            String filePath = null;
+            try {
+                filePath = new File(".").getCanonicalPath() + "/src/main/webapp/WEB-INF/images/" + sheetMusic.getPdf();
+                fileService.deleteFile(filePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        sheetMusicRepository.deleteAll();
     }
 }
