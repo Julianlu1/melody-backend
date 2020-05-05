@@ -1,7 +1,7 @@
 
-squid:S1488s"cImmediately return this expression instead of assigning it to the temporary variable "sheetMusics".(Ü™ä8¿á¸™.
-vsquid:S11925"XDefine a constant instead of duplicating this literal "Oeps, er gaat iets fout" 3 times.(ÍŞºı8’ê‘œš.
-esquid:UselessImportCheck"5Remove this unused import 'server.logic.FileService'.(—é¸£üÿÿÿÿ8¦‹ø›š.
-_squid:UselessImportCheck"4Remove this unused import 'java.lang.reflect.Array'.(‡¡É˜8ÙÚÆ˜š.
-zsquid:UselessImportCheck"JRemove this unused import 'org.springframework.core.io.ClassPathResource'.(İ¹º§ıÿÿÿÿ8²Ñœš.
-nsquid:CommentedOutCodeLineU"<This block of commented-out lines of code should be removed.(ÔúÓúûÿÿÿÿ8¿á¸™.
+rsquid:UselessImportCheck"GRemove this unused import 'org.springframework.core.io.ResourceLoader'.(çàÉÇ8ˆˆ£·š.
+vsquid:S11920"XDefine a constant instead of duplicating this literal "Oeps, er gaat iets fout" 6 times.(ÍŞºı8éÏ¢·š.
+_squid:UselessImportCheck"/Remove this unused import 'java.util.Optional'.(¨˜ëİüÿÿÿÿ8ıªÒ·š.
+jsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(å¯Ñ8†û»š.
+nsquid:CommentedOutCodeLineP"<This block of commented-out lines of code should be removed.(ÔúÓúûÿÿÿÿ8éÏ¢·š.
+nsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ïˆ·ñúÿÿÿÿ8†û»š.

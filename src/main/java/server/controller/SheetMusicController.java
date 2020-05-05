@@ -107,10 +107,9 @@ public class SheetMusicController {
     }
 
     @GetMapping("/sheetmusic/filter")
-    public ResponseEntity findSheetMusicByFilter(@RequestBody Map<String,String> body){
-        String componist = body.get("componist");
-        String key = body.get("key");
-        String instrument = body.get("instrument");
+    public ResponseEntity findSheetMusicByFilter(@RequestParam(required = false) String componist,@RequestParam(required = false) String instrument){
+
+        String key= null;
 
         try{
             List<SheetMusic> sheetMusics = sheetMusicLogic.findSheetMusicByFilter(componist,key,instrument);
@@ -120,13 +119,5 @@ public class SheetMusicController {
             String jsonString = gson.toJson(ex);
             return new ResponseEntity(jsonString,HttpStatus.BAD_REQUEST);
         }
-//        ExampleMatcher matcher = ExampleMatcher.matching()
-//                .withMatcher("componist", new ExampleMatcher.GenericPropertyMatcher().exact())
-//                .withMatcher("key",new ExampleMatcher.GenericPropertyMatcher().exact())
-//                .withMatcher("instrument",new ExampleMatcher.GenericPropertyMatcher().exact())
-//                .withIncludeNullValues();
-//
-//        Example<SheetMusic> example = Example.of(sheetMusic, matcher);
     }
-
 }

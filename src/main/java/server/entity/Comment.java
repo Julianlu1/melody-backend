@@ -21,11 +21,9 @@ public class Comment {
 //        return user.getUsername();
 //    }
 
-    private String title;
-
     private String description;
 
-    private int score;
+    private double score;
 
     // Een comment hoort maar bij 1 sheetmusic
     // Relatie op basis van het sheet_music_id
@@ -35,10 +33,9 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(SheetMusic sheetMusic, int userId, String title, String description, int score) {
+    public Comment(SheetMusic sheetMusic, int userId, String description, double score) {
         this.sheetMusic = sheetMusic;
         this.userId = userId;
-        this.title = title;
         this.description = description;
         this.score = score;
     }
@@ -65,14 +62,6 @@ public class Comment {
         this.userId = userId;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -81,7 +70,7 @@ public class Comment {
         this.description = description;
     }
 
-    public int getScore() {
+    public double getScore() {
         return score;
     }
 

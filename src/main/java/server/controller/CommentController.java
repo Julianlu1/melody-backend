@@ -41,14 +41,13 @@ public class CommentController {
         int userId = jwtService.getIdFromToken();
 
         int sheetId = Integer.parseInt(body.get("sheetId"));
-        String title = body.get("title");
         String description = body.get("description");
-        int score = Integer.parseInt(body.get("score"));
+        double score = Double.parseDouble(body.get("score"));
 
         // Kleine bug hier
         // sheetmusic heeft een lijst met comments, deze comments hebben weer een sheetmusic, en die sheetmusic heeft weer een lijst met comments.
         SheetMusic sheetMusic = sheetMusicRepository.findById(sheetId).orElse(null);
-        Comment comment = commentLogic.AddComment(sheetMusic,userId,title,description,score);
+        Comment comment = commentLogic.AddComment(sheetMusic,userId,description,score);
 
         return comment;
     }
