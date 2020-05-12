@@ -1,4 +1,4 @@
 
-‚squid:S14882"_Immediately return this expression instead of assigning it to the temporary variable "comment".(Î¶üƒşÿÿÿÿ8ß¹¢š.
-nsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ÚÖŞ±úÿÿÿÿ8ØŞÄ§•.
 isquid:CommentedOutCodeLine!"<This block of commented-out lines of code should be removed.(àóÑâ8ØŞÄ§•.
+nsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ÚÖŞ±úÿÿÿÿ8ØŞÄ§•.
+‚squid:S14882"_Immediately return this expression instead of assigning it to the temporary variable "comment".(Î¶üƒşÿÿÿÿ8ß¹¢š.

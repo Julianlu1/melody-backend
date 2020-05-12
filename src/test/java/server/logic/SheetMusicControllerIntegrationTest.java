@@ -58,10 +58,11 @@ public class SheetMusicControllerIntegrationTest {
 
         // Assert
         assertNotNull(sheetMusics);
+        assertEquals(200,mvcResult.getResponse().getStatus());
     }
 
     @Test
-    public void getSingleSheetmusic() throws Exception {
+    public void getSingleSheetmusicTest() throws Exception {
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders
                 .get("/sheetmusic/43")
                 .accept(MediaType.APPLICATION_JSON))
@@ -73,5 +74,47 @@ public class SheetMusicControllerIntegrationTest {
 
         // Assert
         assertNotNull(sheetMusic);
+        assertEquals(200,mvcResult.getResponse().getStatus());
+    }
+
+    @Test
+    public void filterSheetOnInstrumentTest() throws Exception {
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders
+        .get("/sheetmusic/filter?instrument=Piano")
+        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String body = mvcResult.getResponse().getContentAsString();
+
+        SheetMusic[] sheetMusicArray = gson.fromJson(body,SheetMusic[].class);
+        List<SheetMusic> sheetMusics = Arrays.asList(sheetMusicArray);
+
+        for(SheetMusic sheet : sheetMusics){
+            assertEquals(sheet.getInstrument(),"Piano");
+        }
+
+        assertEquals(200,mvcResult.getResponse().getStatus());
+    }
+
+    @Test
+    public void filterSheetOnComponistAndInstrumentTest() throws Exception {
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders
+                .get("/sheetmusic/filter?componist=Alan Walker&instrument=Piano")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String body = mvcResult.getResponse().getContentAsString();
+
+        SheetMusic[] sheetMusicArray = gson.fromJson(body,SheetMusic[].class);
+        List<SheetMusic> sheetMusics = Arrays.asList(sheetMusicArray);
+
+        for(SheetMusic sheet : sheetMusics){
+            assertEquals(sheet.getComponist(),"Alan Walker");
+            assertEquals(sheet.getInstrument(),"Piano");
+        }
+
+        assertEquals(200,mvcResult.getResponse().getStatus());
     }
 }

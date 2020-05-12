@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import server.entity.Comment;
 import server.entity.SheetMusic;
+import server.entity.User;
 import server.repository.CommentRepository;
 
 @Component

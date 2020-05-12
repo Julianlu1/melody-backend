@@ -7,10 +7,6 @@ Y
 .src/main/java/server/MainApplicationClass.java,e\a\ea717e21c6880c62e26f8d62d5015dc4458108be
 ;
 .travis.yml,d\e\dea01dd89a3b602828e630677fde5d77c06441c8
-S
-#src/test/java/server/mock/Mock.java,d\7\d7da70a6514fcdabae534e799b4daa141f106e0c
-X
-(src/test/java/server/logic/TestTest.java,1\7\177fccdd6bfde62913504e1f536d8458d68e05a9
 i
 9src/main/java/server/repository/SheetMusicRepository.java,3\0\30d20aea49038c3f3c21109a80414ab788091a15
 [
@@ -59,3 +55,11 @@ Z
 *src/main/java/server/GeneralException.java,c\f\cfb64585f1f55383b36e3f92f81add34a7b9472e
 _
 /src/main/java/server/logic/SheetMusicLogic.java,2\d\2dcb0697e8f2fbe977d310eb5ffa1dd50327e7b0
+s
+Csrc/test/java/server/logic/SheetMusicControllerIntegrationTest.java,8\b\8b44c05d5a9c738baa628f1437a887c05eee03b4
+p
+@src/test/java/server/logic/CommentControllerIntegrationTest.java,2\8\286c6376b36756f9a27abeaa6f441fa9ff427a8a
+X
+(src/test/java/server/model/UserTest.java,0\e\0efd480b4569ca72aeea6b8b3f7bbfaf7f7c0a67
+l
+<src/test/java/server/logic/AuthorizationIntegrationTest.java,b\d\bdfa466fc26e5dbc2cec4a4ac4d32d8eaac2816e

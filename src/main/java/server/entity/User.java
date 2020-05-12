@@ -1,7 +1,9 @@
 package server.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "`user`")
@@ -23,6 +25,11 @@ public class User {
 
     @Column(name="updated_at")
     private Date updatedAt;
+
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    List<Comment> comments = new ArrayList<>();
+
 
     public User() {
     }
