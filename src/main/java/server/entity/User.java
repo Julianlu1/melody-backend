@@ -26,11 +26,6 @@ public class User {
     @Column(name="updated_at")
     private Date updatedAt;
 
-    @OneToMany
-    @JoinColumn(name = "user_id")
-    List<Comment> comments = new ArrayList<>();
-
-
     public User() {
     }
 
@@ -41,6 +36,7 @@ public class User {
         this.creationDate = date;
         this.updatedAt = date;
     }
+
 
     public int getId() {
         return id;

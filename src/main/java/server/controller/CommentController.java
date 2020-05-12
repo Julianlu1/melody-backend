@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import server.entity.Comment;
 import server.entity.SheetMusic;
+import server.entity.User;
 import server.logic.CommentLogic;
 import server.logic.JwtService;
 import server.repository.CommentRepository;
 import server.repository.SheetMusicRepository;
+import server.repository.UserRepository;
 
 import java.util.Map;
 
@@ -26,6 +28,8 @@ public class CommentController {
     @Autowired
     SheetMusicRepository sheetMusicRepository;
 
+    @Autowired
+    UserRepository userRepository;
 //    @GetMapping("/sheetmusic/{sheetId}/comments")
 //    public List<Comment> index(@PathVariable String sheetId){
 //        int id =Integer.parseInt(sheetId);
@@ -47,7 +51,9 @@ public class CommentController {
         // Kleine bug hier
         // sheetmusic heeft een lijst met comments, deze comments hebben weer een sheetmusic, en die sheetmusic heeft weer een lijst met comments.
         SheetMusic sheetMusic = sheetMusicRepository.findById(sheetId).orElse(null);
-        Comment comment = commentLogic.AddComment(sheetMusic,userId,description,score);
+        User user = userRepository.findById(userId).orElse(null);
+
+        Comment comment = commentLogic.AddComment(sheetMusic,user,description,score);
 
         return comment;
     }

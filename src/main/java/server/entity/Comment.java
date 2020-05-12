@@ -11,11 +11,11 @@ public class Comment {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "user_id")
-    private int userId;
+//    @Column(name = "user_id")
+//    private int userId;
 
-//    @ManyToOne
-//    private User user;
+    @ManyToOne
+    private User user;
 //
 //    public int getUsername(){
 //        return user.getUsername();
@@ -33,9 +33,9 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(SheetMusic sheetMusic, int userId, String description, double score) {
+    public Comment(SheetMusic sheetMusic, User user, String description, double score) {
         this.sheetMusic = sheetMusic;
-        this.userId = userId;
+        this.user = user;
         this.description = description;
         this.score = score;
     }
@@ -44,6 +44,9 @@ public class Comment {
         return id;
     }
 
+    public String getUsername(){
+        return this.user.getUsername();
+    }
 
     // Dit laat de sheet music id zien in json
     public int getSheet_music_id(){
@@ -52,14 +55,6 @@ public class Comment {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public String getDescription() {
