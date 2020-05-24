@@ -1,9 +1,9 @@
 
 lsquid:S4042#"IUse "java.nio.Files#delete" here for better messages on error conditions.(²Œ­ûÿÿÿÿ8²•«·š.
-esquid:S00112&"FDefine and throw a dedicated exception instead of using a generic one.(Æ£ÖÅ8‚Åú§—.
 Rsquid:UselessImportCheck")Remove this unused import 'java.net.URL'.(ñìÁ„üÿÿÿÿ
 ]
 squid:S899#";Do something with the "boolean" value returned by "delete".(²Œ­ûÿÿÿÿ8²•«·š.
-esquid:S001123"FDefine and throw a dedicated exception instead of using a generic one.(ïåãü8Ÿ™ù§—.
-dsquid:S00112("FDefine and throw a dedicated exception instead of using a generic one.(Ì…Çi8ù—ø§—.
 asquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(•¶K
+dsquid:S00112("FDefine and throw a dedicated exception instead of using a generic one.(Ì…Çi8ù—ø§—.
+esquid:S00112&"FDefine and throw a dedicated exception instead of using a generic one.(Æ£ÖÅ8‚Åú§—.
+esquid:S001123"FDefine and throw a dedicated exception instead of using a generic one.(ïåãü8Ÿ™ù§—.

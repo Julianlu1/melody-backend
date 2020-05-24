@@ -5,7 +5,9 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+import server.entity.Instrument;
 import server.entity.SheetMusic;
+import server.repository.InstrumentRepository;
 import server.repository.SheetMusicRepository;
 
 import java.io.File;
@@ -19,6 +21,9 @@ public class SheetMusicLogic {
     SheetMusicRepository sheetMusicRepository;
 
     @Autowired
+    InstrumentRepository instrumentRepository;
+
+    @Autowired
     FileService fileService;
 
     public List<SheetMusic> findAll(){
@@ -29,9 +34,9 @@ public class SheetMusicLogic {
         return sheetMusicRepository.findById(id).orElse(null);
     }
 
-    public SheetMusic addSheetMusic(String title, String componist, String key, String instrument, String fileName, MultipartFile file) throws IOException {
+    public SheetMusic addSheetMusic(String title, String componist, String key, String fileName, MultipartFile file, Instrument instrument) throws IOException {
         // Aanmaken
-        SheetMusic sheetMusic = new SheetMusic(title,componist,key,instrument,fileName);
+        SheetMusic sheetMusic = new SheetMusic(title,componist,key,fileName,instrument);
 
         // Bestand opslaan op server
         String path = new File(".").getCanonicalPath() + "/src/main/webapp/WEB-INF/images/";
@@ -44,13 +49,18 @@ public class SheetMusicLogic {
         return sheetMusic;
     }
 
-    public List<SheetMusic> findSheetMusicByFilter(String componist, String key, String instrument){
+    public List<SheetMusic> findSheetMusicByFilter(String componist, String key, Integer instrument_id){
+
+        
+        Instrument instrument = instrumentRepository.findById(instrument_id).orElse(null);
         SheetMusic sheetMusic = new SheetMusic(componist,key,instrument);
+
         Example<SheetMusic> employeeExample = Example.of(sheetMusic, ExampleMatcher.matching()
                 .withIgnorePaths("id")
                 .withIgnorePaths("title")
                 .withIgnorePaths("pdf")
-                .withIgnorePaths("comments"));
+                .withIgnorePaths("comments")
+        .withIgnorePaths("instrument_id"));
 
         List<SheetMusic> sheetMusics = sheetMusicRepository.findAll(employeeExample);
         return sheetMusics;

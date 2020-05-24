@@ -25,19 +25,19 @@ public class CommentControllerIntegrationTest {
 
     private Gson gson;
 
-//    @Test
-//    public void addCommentTest() throws Exception {
-//        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders
-//                .get("/comments/45")
-//                .accept(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isOk()).andReturn();
-//
-//        String body = mvcResult.getResponse().getContentAsString();
-//
-//        Comment[] commentArray = gson.fromJson(body,Comment[].class);
-//
-//        assertNotNull(commentArray);
-//        assertEquals(200,mvcResult.getResponse().getStatus());
-//    }
+    @Test
+    public void addCommentTest() throws Exception {
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders
+                .post("/comments/45")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk()).andReturn();
+
+        String body = mvcResult.getResponse().getContentAsString();
+
+        Comment[] commentArray = gson.fromJson(body,Comment[].class);
+
+        assertNotNull(commentArray);
+        assertEquals(200,mvcResult.getResponse().getStatus());
+    }
 
 }

@@ -9,5 +9,6 @@ import java.util.List;
 
 @Repository
 public interface SheetMusicRepository extends JpaRepository<SheetMusic,Integer>, QueryByExampleExecutor<SheetMusic> {
-    List<SheetMusic> findByComponistAndKeyAndInstrument(String componist, String key, String instrument);
+//    List<SheetMusic> findByComponistAndKeyAndInstrument(String componist, String key);
+//    List<SheetMusic> findByComponistAndKeyAndInstrument(String componist, String key, String instrument);
 }

@@ -1,8 +1,8 @@
 
-_squid:UselessImportCheck"/Remove this unused import 'java.util.Optional'.(¨˜ëİüÿÿÿÿ8ıªÒ·š.
+rsquid:UselessImportCheck"GRemove this unused import 'org.springframework.core.io.ResourceLoader'.(çàÉÇ8ˆˆ£·š.
+tsquid:UselessImportCheck"DRemove this unused import 'org.springframework.data.domain.Example'.(³˜œÍüÿÿÿÿ8¸ãÑ¢.
 vsquid:S11920"XDefine a constant instead of duplicating this literal "Oeps, er gaat iets fout" 6 times.(ÍŞºı8éÏ¢·š.
 {squid:UselessImportCheck"KRemove this unused import 'org.springframework.data.domain.ExampleMatcher'.(¯û¸ûÿÿÿÿ8¸ãÑ¢.
-tsquid:UselessImportCheck"DRemove this unused import 'org.springframework.data.domain.Example'.(³˜œÍüÿÿÿÿ8¸ãÑ¢.
 nsquid:CommentedOutCodeLineP"<This block of commented-out lines of code should be removed.(ÔúÓúûÿÿÿÿ8éÏ¢·š.
+_squid:UselessImportCheck"/Remove this unused import 'java.util.Optional'.(¨˜ëİüÿÿÿÿ8ıªÒ·š.
 Zsquid:UselessImportCheck"*Remove this unused import 'java.util.Map'.(¼è½Òşÿÿÿÿ8¦²¨¤.
-rsquid:UselessImportCheck"GRemove this unused import 'org.springframework.core.io.ResourceLoader'.(çàÉÇ8ˆˆ£·š.

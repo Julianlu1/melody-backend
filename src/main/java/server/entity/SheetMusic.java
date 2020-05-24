@@ -21,7 +21,10 @@ public class SheetMusic {
 
     private String key;
 
-    private String instrument;
+    @OneToOne
+    private Instrument instrument;
+
+//    private int instrument_id;
 
     // Een sheetmusic heeft meerdere comments
     // mappedBy = "sheetMusic" is de variabele naam in de Comment entity (mappedBy = "sheetMusic")
@@ -38,18 +41,18 @@ public class SheetMusic {
 
     // Aparate constructor voor het filteren
     // Filteren kan op componist, key en instrument
-    public SheetMusic(String componist, String key, String instrument){
+    public SheetMusic(String componist, String key,Instrument instrument){
         this.componist = componist;
         this.key = key;
         this.instrument = instrument;
     }
 
-    public SheetMusic(String title, String componist, String key, String instrument, String pdf) {
+    public SheetMusic(String title, String componist, String key, String pdf, Instrument instrument) {
         this.title = title;
         this.componist = componist;
         this.key = key;
-        this.instrument = instrument;
         this.pdf = pdf;
+        this.instrument = instrument;
     }
 
     public int getId() {
@@ -58,6 +61,10 @@ public class SheetMusic {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getInstrument_Description() {
+        return instrument.getDescription();
     }
 
     public String getTitle() {
@@ -82,14 +89,6 @@ public class SheetMusic {
 
     public void setKey(String key) {
         this.key = key;
-    }
-
-    public String getInstrument() {
-        return instrument;
-    }
-
-    public void setInstrument(String instrument) {
-        this.instrument = instrument;
     }
 
     public String getPdf() {

@@ -10,8 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import server.GeneralException;
+import server.entity.Instrument;
 import server.entity.SheetMusic;
 import server.logic.SheetMusicLogic;
+import server.repository.InstrumentRepository;
 import server.repository.SheetMusicRepository;
 import javax.servlet.ServletContext;
 import java.io.*;
@@ -38,6 +40,9 @@ public class SheetMusicController {
 
     @Autowired
     SheetMusicRepository sheetMusicRepository;
+
+    @Autowired
+    InstrumentRepository instrumentRepository;
 
     @GetMapping("/sheetmusic")
     public ResponseEntity index(){
@@ -66,10 +71,11 @@ public class SheetMusicController {
     }
 
     @PostMapping(value = "/sheetmusic")
-    public ResponseEntity create(@RequestParam("file") MultipartFile file, @RequestParam("title") String title, @RequestParam("componist") String componist, @RequestParam("key") String key, @RequestParam("instrument") String instrument) throws IOException {
+    public ResponseEntity create(@RequestParam("file") MultipartFile file, @RequestParam("title") String title, @RequestParam("componist") String componist, @RequestParam("key") String key, @RequestParam("instrument_id") int instrument_id) throws IOException {
 
         try{
-            SheetMusic sheetMusic = sheetMusicLogic.addSheetMusic(title,componist,key,instrument,file.getOriginalFilename(),file);
+            Instrument instrument = instrumentRepository.findById(instrument_id).orElse(null);
+            SheetMusic sheetMusic = sheetMusicLogic.addSheetMusic(title,componist,key,file.getOriginalFilename(),file,instrument);
             return ResponseEntity.ok(sheetMusic);
         }catch(Exception e){
             GeneralException ex = new GeneralException("Oeps, er gaat iets fout");
@@ -107,12 +113,9 @@ public class SheetMusicController {
     }
 
     @GetMapping("/sheetmusic/filter")
-    public ResponseEntity findSheetMusicByFilter(@RequestParam(required = false) String componist,@RequestParam(required = false) String instrument){
-
-        String key= null;
-
+    public ResponseEntity findSheetMusicByFilter(@RequestParam(required = false) String componist, @RequestParam(required=false) String key, @RequestParam(required = false) Integer instrument_id){
         try{
-            List<SheetMusic> sheetMusics = sheetMusicLogic.findSheetMusicByFilter(componist,key,instrument);
+            List<SheetMusic> sheetMusics = sheetMusicLogic.findSheetMusicByFilter(componist,key,instrument_id);
             return ResponseEntity.ok(sheetMusics);
         }catch(Exception e){
             GeneralException ex = new GeneralException("Oeps, er gaat iets fout");
