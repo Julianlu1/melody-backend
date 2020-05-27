@@ -1,4 +1,4 @@
-"# melody-backend" 
+# melody-backend - Een REST server 
 
 # Wat is melody?
 Melody is een webapplicatie gemaakt met een back-end geschreven in Java (Spring boot) en een front-end met Reactjs. Met deze webapplicatie kunnen gebruikers registeren, inloggen, bladmuziek uploaden en nog veel meer. De bladmuziek is downloadbaar voor gebruikers die de applicatie bezoeken. (Zie front-end repository voor meer info)
