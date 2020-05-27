@@ -47,6 +47,7 @@ public class AuthorizationIntegrationTest {
         String body = mvcResult.getResponse().getContentAsString();
 
         assertNotNull(body);
+        assertEquals(200,mvcResult.getResponse().getStatus());
     }
 
     @Test

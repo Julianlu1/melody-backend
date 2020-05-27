@@ -24,6 +24,8 @@ public class SheetMusic {
     @OneToOne
     private Instrument instrument;
 
+//    private String instrument_Description;
+
 //    private int instrument_id;
 
     // Een sheetmusic heeft meerdere comments
