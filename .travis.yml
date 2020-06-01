@@ -2,7 +2,7 @@ language: java
 jdk:
   - openjdk11
 before_script:
-- psql -c 'create database melody;' -U postgres
+- psql -c 'create database postgres;' -U postgres
 script:
   - mvn clean install
 services:
