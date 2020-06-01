@@ -1,10 +1,10 @@
 
-Zsquid:UselessImportCheck"*Remove this unused import 'java.util.Map'.(¼è½Òşÿÿÿÿ8”¨š¾¤.
-{squid:UselessImportCheck"KRemove this unused import 'org.springframework.data.domain.ExampleMatcher'.(¯û¸ûÿÿÿÿ8¸ãÑ¢.
-nsquid:CommentedOutCodeLineV"<This block of commented-out lines of code should be removed.(ÔúÓúûÿÿÿÿ8éÏ¢·š.
 usquid:S00117t"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(…û‰æûÿÿÿÿ8øÖÏ¾¤.
+{squid:UselessImportCheck"KRemove this unused import 'org.springframework.data.domain.ExampleMatcher'.(¯û¸ûÿÿÿÿ8¸ãÑ¢.
 vsquid:S11925"XDefine a constant instead of duplicating this literal "Oeps, er gaat iets fout" 6 times.(ÍŞºı8éÏ¢·š.
 rsquid:UselessImportCheck"GRemove this unused import 'org.springframework.core.io.ResourceLoader'.(çàÉÇ8ˆˆ£·š.
-_squid:UselessImportCheck"/Remove this unused import 'java.util.Optional'.(¨˜ëİüÿÿÿÿ8ıªÒ·š.
-osquid:S00117J"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(âÃ´I8Š–ì½¤.
 tsquid:UselessImportCheck"DRemove this unused import 'org.springframework.data.domain.Example'.(³˜œÍüÿÿÿÿ8¸ãÑ¢.
+osquid:S00117J"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(âÃ´I8Š–ì½¤.
+_squid:UselessImportCheck"/Remove this unused import 'java.util.Optional'.(¨˜ëİüÿÿÿÿ8ıªÒ·š.
+nsquid:CommentedOutCodeLineV"<This block of commented-out lines of code should be removed.(ÔúÓúûÿÿÿÿ8éÏ¢·š.
+Zsquid:UselessImportCheck"*Remove this unused import 'java.util.Map'.(¼è½Òşÿÿÿÿ8”¨š¾¤.

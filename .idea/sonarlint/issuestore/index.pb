@@ -69,3 +69,9 @@ i
 9src/main/java/server/repository/InstrumentRepository.java,3\b\3b1aaffef067db6a9882280684e7212dfbe123f5
 i
 9src/main/java/server/controller/InstrumentController.java,9\0\90767e4129d758e967874bca6f35b46901a7b982
+i
+9src/test/java/server/logic/InstrumentIntegrationTest.java,c\b\cbb30e6b81d299ff5b0c702380511bbc391a899c
+\
+,src/test/java/server/model/CommentModel.java,9\f\9f6c9b681ba263c242bace7045dec1f356b3ff32
+_
+/src/test/java/server/model/SheetMusicModel.java,3\1\314db94cb7a812f2f91b981842044f8a6acbeada
