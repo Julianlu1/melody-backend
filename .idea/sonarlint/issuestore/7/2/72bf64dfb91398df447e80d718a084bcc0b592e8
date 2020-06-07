@@ -1,4 +1,4 @@
 
 Xsquid:S1481";Remove this unused "base64EncodedSignature" local variable.(ºô¡8¡½æì—.
-psquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(²ÄÆü8¡½æì—.
 gsquid:S1854"JRemove this useless assignment to local variable "base64EncodedSignature".(ºô¡8¡½æì—.
+psquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(²ÄÆü8¡½æì—.

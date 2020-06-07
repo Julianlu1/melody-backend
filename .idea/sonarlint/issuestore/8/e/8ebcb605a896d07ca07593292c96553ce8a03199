@@ -1,4 +1,4 @@
 
-}squid:S14888"_Immediately return this expression instead of assigning it to the temporary variable "comment".(ğ„—Ÿ8ß¹¢š.
-nsquid:CommentedOutCodeLine""<This block of commented-out lines of code should be removed.(ÚÖŞ±úÿÿÿÿ8ØŞÄ§•.
-isquid:CommentedOutCodeLine%"<This block of commented-out lines of code should be removed.(àóÑâ8ØŞÄ§•.
+nsquid:CommentedOutCodeLine+"<This block of commented-out lines of code should be removed.(ÚÖŞ±úÿÿÿÿ8ØŞÄ§•.
+isquid:CommentedOutCodeLine."<This block of commented-out lines of code should be removed.(àóÑâ8ØŞÄ§•.
+gsquid:UselessImportCheck"=Remove this unused import 'server.repository.UserRepository'.(‚Œµ$8üÈŠ«§.

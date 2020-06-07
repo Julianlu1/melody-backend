@@ -1,4 +1,4 @@
 
+zsquid:UselessImportCheck"ORemove this unused import 'org.springframework.security.core.userdetails.User'.(–Ä€8˜øÌï—.
 Ë%squid:RedundantThrowsDeclarationCheck"’Remove the declaration of thrown exception 'org.springframework.security.core.userdetails.UsernameNotFoundException' which is a runtime exception.(ÌÃŸ8ŠÉâ¦•.
 usquid:UselessImportCheck	"ERemove this unused import 'org.springframework.stereotype.Component'.(Ş÷Ñ¸ÿÿÿÿÿ8¤Í‚ÈŸ.
-zsquid:UselessImportCheck"ORemove this unused import 'org.springframework.security.core.userdetails.User'.(–Ä€8˜øÌï—.

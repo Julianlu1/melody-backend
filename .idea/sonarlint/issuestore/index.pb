@@ -81,3 +81,9 @@ j
 :src/main/java/server/controller/PlayedSheetController.java,2\5\25c3a1e8c299bf98dd65f3d82093bf0023dff5bb
 j
 :src/main/java/server/repository/PlayedSheetRepository.java,c\2\c2924ca9e360fd1cc8c72bb994948d4b188f6e8f
+_
+/src/test/java/server/model/UserDetailsTest.java,8\a\8afb66887b447e38c771fd1be83569b0dd208239
+_
+/src/main/java/server/logic/InstrumentLogic.java,1\2\127bae0e1b835c111126da94461158084e06420b
+Y
+)src/main/java/server/logic/UserLogic.java,5\9\59fa38fe2f88a1b1184fa3568bfa9a4411e7a395

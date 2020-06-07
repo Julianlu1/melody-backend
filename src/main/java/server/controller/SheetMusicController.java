@@ -7,11 +7,14 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import server.GeneralException;
 import server.entity.Instrument;
 import server.entity.SheetMusic;
+import server.entity.User;
+import server.logic.InstrumentLogic;
 import server.logic.SheetMusicLogic;
 import server.repository.InstrumentRepository;
 import server.repository.SheetMusicRepository;
@@ -33,6 +36,9 @@ public class SheetMusicController {
     private SheetMusicLogic sheetMusicLogic;
 
     @Autowired
+    private InstrumentLogic instrumentLogic;
+
+    @Autowired
     ServletContext context;
 
     @Autowired
@@ -45,7 +51,7 @@ public class SheetMusicController {
     InstrumentRepository instrumentRepository;
 
     @GetMapping("/sheetmusic")
-    public ResponseEntity index(){
+    public ResponseEntity findAll(){
         try{
             List<SheetMusic> sheetMusics = sheetMusicLogic.findAll();
             return ResponseEntity.ok(sheetMusics);
@@ -57,12 +63,16 @@ public class SheetMusicController {
     }
 
     @GetMapping("/sheetmusic/{id}")
-    public ResponseEntity getById(@PathVariable String id){
+    public ResponseEntity findById(@PathVariable String id){
         int sheetId = Integer.parseInt(id);
 
         try{
             SheetMusic sheetMusic2 = sheetMusicLogic.findById(sheetId);
-            return ResponseEntity.ok(sheetMusic2);
+            if(sheetMusic2 != null){
+                return ResponseEntity.ok(sheetMusic2);
+            }else{
+                return new ResponseEntity("Sheet bestaat niet",HttpStatus.BAD_REQUEST);
+            }
         }catch(Exception e){
             GeneralException ex = new GeneralException("Oeps, er gaat iets fout");
             String jsonString = gson.toJson(ex);
@@ -74,13 +84,13 @@ public class SheetMusicController {
     public ResponseEntity create(@RequestParam("file") MultipartFile file, @RequestParam("title") String title, @RequestParam("componist") String componist, @RequestParam("key") String key, @RequestParam("instrument_id") int instrument_id) throws IOException {
 
         try{
-            Instrument instrument = instrumentRepository.findById(instrument_id).orElse(null);
+            Instrument instrument = instrumentLogic.findById(instrument_id);
             SheetMusic sheetMusic = sheetMusicLogic.addSheetMusic(title,componist,key,file.getOriginalFilename(),file,instrument);
             return ResponseEntity.ok(sheetMusic);
         }catch(Exception e){
             GeneralException ex = new GeneralException("Oeps, er gaat iets fout");
             String jsonString = gson.toJson(ex);
-            return new ResponseEntity(jsonString,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(jsonString,HttpStatus.BAD_REQUEST);
         }
         //        Uploads to target/static
 //        String filePath = ResourceUtils.getFile("classpath:static").toString();
@@ -96,7 +106,7 @@ public class SheetMusicController {
         }catch(Exception e){
             GeneralException ex = new GeneralException("Oeps, er gaat iets fout");
             String jsonString = gson.toJson(ex);
-            return new ResponseEntity(jsonString,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(jsonString,HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -108,7 +118,7 @@ public class SheetMusicController {
         }catch(Exception e){
             GeneralException ex = new GeneralException("Oeps, er gaat iets fout");
             String jsonString = gson.toJson(ex);
-            return new ResponseEntity(jsonString,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(jsonString,HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -120,7 +130,20 @@ public class SheetMusicController {
         }catch(Exception e){
             GeneralException ex = new GeneralException("Oeps, er gaat iets fout");
             String jsonString = gson.toJson(ex);
-            return new ResponseEntity(jsonString,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(jsonString,HttpStatus.BAD_REQUEST);
         }
     }
+
+    @PostMapping("/sheetmusic/played")
+    public ResponseEntity markAsPlayed(@AuthenticationPrincipal User user, int sheetId){
+        try{
+            SheetMusic sheetMusic = sheetMusicLogic.markAsPlayed(user,sheetId);
+            return ResponseEntity.ok(sheetMusic);
+        }catch(Exception e){
+            GeneralException ex = new GeneralException("Oeps, er gaat iets fout");
+            String jsonString = gson.toJson(ex);
+            return new ResponseEntity<>(jsonString,HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }

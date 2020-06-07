@@ -3,12 +3,16 @@ package server.logic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import server.entity.Instrument;
+import server.entity.PlayedSheet;
 import server.entity.SheetMusic;
+import server.entity.User;
 import server.repository.InstrumentRepository;
 import server.repository.SheetMusicRepository;
+import server.repository.UserRepository;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,10 +25,14 @@ public class SheetMusicLogic {
     SheetMusicRepository sheetMusicRepository;
 
     @Autowired
+    UserRepository userRepository;
+
+    @Autowired
     InstrumentRepository instrumentRepository;
 
     @Autowired
     FileService fileService;
+
 
     public List<SheetMusic> findAll(){
         return sheetMusicRepository.findAll();
@@ -66,6 +74,14 @@ public class SheetMusicLogic {
         return sheetMusics;
     }
 
+    public SheetMusic markAsPlayed(User user,int sheetId){
+        SheetMusic sheetMusic = sheetMusicRepository.findById(sheetId).orElse(null);
+        PlayedSheet playedSheet = new PlayedSheet(sheetMusic,user);
+//        user.getPlayedSheets().add(playedSheet);
+        userRepository.save(user);
+        return sheetMusic;
+    }
+
     public void deleteById(int id) throws IOException {
         SheetMusic sheetMusic = findById(id);
         String filePath = new File(".").getCanonicalPath() + "/src/main/webapp/WEB-INF/images/" + sheetMusic.getPdf();
@@ -86,4 +102,6 @@ public class SheetMusicLogic {
         });
         sheetMusicRepository.deleteAll();
     }
+
+
 }

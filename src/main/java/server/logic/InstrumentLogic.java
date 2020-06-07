@@ -9,6 +9,7 @@ import java.util.List;
 
 @Component
 public class InstrumentLogic {
+
     @Autowired
     private InstrumentRepository instrumentRepository;
 
@@ -16,4 +17,7 @@ public class InstrumentLogic {
         return this.instrumentRepository.findAll();
     }
 
+    public Instrument findById(int id){
+        return this.instrumentRepository.findById(id).orElse(null);
+    }
 }

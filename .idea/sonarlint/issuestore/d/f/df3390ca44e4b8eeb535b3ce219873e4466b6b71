@@ -1,11 +1,11 @@
 
-Isquid:S1452""&Remove usage of generic wildcard type.(¤ƒ¹€úÿÿÿÿ8ïèÛ¦•.
-esquid:S001127"FDefine and throw a dedicated exception instead of using a generic one.(Â††‘8ñâ§•.
+esquid:S00112>"FDefine and throw a dedicated exception instead of using a generic one.(Â††‘8ñâ§•.
+msquid:S4488("JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(¶€»²ùÿÿÿÿ8ïèÛ¦•.
+esquid:S00112F"FDefine and throw a dedicated exception instead of using a generic one.(ÈçïÕ8ñâ§•.
+hsquid:S44881"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ÚŞ•8Ô¢£§•.
+jsquid:S00112C"FDefine and throw a dedicated exception instead of using a generic one.(êÆÖËùÿÿÿÿ8ñâ§•.
+Isquid:S1452)"&Remove usage of generic wildcard type.(¤ƒ¹€úÿÿÿÿ8ïèÛ¦•.
+Isquid:S14522"&Remove usage of generic wildcard type.(‘æşÿÿÿÿ8¡Úı¦•.
 ~squid:UselessImportCheck"NRemove this unused import 'org.springframework.security.crypto.bcrypt.BCrypt'.(¨úì®ÿÿÿÿÿ8Ï™Š§•.
-esquid:S00112?"FDefine and throw a dedicated exception instead of using a generic one.(ÈçïÕ8ñâ§•.
-‰squid:UselessImportCheck"YRemove this unused import 'org.springframework.security.crypto.password.PasswordEncoder'.(‰¡ßáÿÿÿÿÿ8Öè¬§•.
-Isquid:S1452+"&Remove usage of generic wildcard type.(‘æşÿÿÿÿ8¡Úı¦•.
-jsquid:S00112<"FDefine and throw a dedicated exception instead of using a generic one.(êÆÖËùÿÿÿÿ8ñâ§•.
-hsquid:S4488*"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ÚŞ•8Ô¢£§•.
 Zsquid:UselessImportCheck"*Remove this unused import 'java.util.Map'.(¼è½Òşÿÿÿÿ8œ¤§•.
-msquid:S4488!"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(¶€»²ùÿÿÿÿ8ïèÛ¦•.
+‰squid:UselessImportCheck"YRemove this unused import 'org.springframework.security.crypto.password.PasswordEncoder'.(‰¡ßáÿÿÿÿÿ8Öè¬§•.
