@@ -7,11 +7,14 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import server.GeneralException;
 import server.entity.Instrument;
+import server.entity.PlayedSheetEntity;
 import server.entity.SheetMusic;
 import server.entity.User;
 import server.logic.InstrumentLogic;
@@ -134,16 +137,6 @@ public class SheetMusicController {
         }
     }
 
-    @PostMapping("/sheetmusic/played")
-    public ResponseEntity markAsPlayed(@AuthenticationPrincipal User user, int sheetId){
-        try{
-            SheetMusic sheetMusic = sheetMusicLogic.markAsPlayed(user,sheetId);
-            return ResponseEntity.ok(sheetMusic);
-        }catch(Exception e){
-            GeneralException ex = new GeneralException("Oeps, er gaat iets fout");
-            String jsonString = gson.toJson(ex);
-            return new ResponseEntity<>(jsonString,HttpStatus.BAD_REQUEST);
-        }
-    }
+
 
 }

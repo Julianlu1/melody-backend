@@ -1,5 +1,6 @@
 package server.controller;
 
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,8 +12,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import server.GeneralException;
 import server.config.JwtTokenUtil;
 import server.entity.User;
+import server.logic.JwtService;
+import server.logic.UserLogic;
 import server.model.JwtRequest;
 import server.model.JwtResponse;
 import server.model.RegisterRequest;
@@ -29,6 +33,15 @@ public class JwtAuthenticationController {
     private JwtTokenUtil jwtTokenUtil;
     @Autowired
     private JwtUserDetailsService userDetailsService;
+
+    @Autowired
+    private JwtService jwtService;
+
+    @Autowired
+    private UserLogic userLogic;
+
+    @Autowired
+    private Gson gson;
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
@@ -51,6 +64,20 @@ public class JwtAuthenticationController {
         }
     }
 
+    @GetMapping("/user")
+    public ResponseEntity getUser(@RequestHeader (name="Authorization") String token){
+       try{
+           jwtService.decodeJwt(token);
+           int userId = jwtService.getIdFromToken();
+           User user = userLogic.findById(userId);
+           return ResponseEntity.ok(user);
+       }catch(Exception e){
+           GeneralException ex = new GeneralException("Oeps, er gaat iets fout");
+           String jsonString = gson.toJson(ex);
+           return new ResponseEntity<>(jsonString,HttpStatus.BAD_REQUEST);
+       }
+
+    }
 
     private void authenticate(String username, String password) throws Exception {
         try {

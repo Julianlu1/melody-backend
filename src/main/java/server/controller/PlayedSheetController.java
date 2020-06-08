@@ -4,14 +4,12 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import server.GeneralException;
-import server.entity.PlayedSheet;
+import server.entity.User;
 import server.logic.JwtService;
-import server.repository.PlayedSheetRepository;
-
-import java.util.List;
-import java.util.Map;
+import server.logic.PlayedSheetLogic;
 
 @RestController
 public class PlayedSheetController {
@@ -22,55 +20,21 @@ public class PlayedSheetController {
     private JwtService jwtService;
 
     @Autowired
-    PlayedSheetRepository playedSheetRepository;
+    PlayedSheetLogic playedSheetLogic;
 
-
-    @GetMapping("/played")
-    public ResponseEntity index(@RequestHeader(name="Authorization") String token){
-        jwtService.decodeJwt(token);
-        int userId = jwtService.getIdFromToken();
-
+    @PostMapping("playedsheet/mark/{sheetId}")
+    public ResponseEntity markAsPlayed(@AuthenticationPrincipal User user, @PathVariable Integer sheetId){
         try{
-            List<PlayedSheet> playedSheets = playedSheetRepository.findByUserId(userId);
-            return ResponseEntity.ok(playedSheets);
-
+            boolean isPlayed = playedSheetLogic.markAsPlayed(sheetId);
+            if(isPlayed){
+                return ResponseEntity.ok("Ongemarkeerd!");
+            }else{
+                return ResponseEntity.ok("Gemarkeerd als gespeeld!");
+            }
         }catch(Exception e){
-            GeneralException generalException = new GeneralException("Oeps, er gaat iets fout");
-            String json = gson.toJson(generalException);
-            return new ResponseEntity(json, HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @PostMapping("/played")
-    public ResponseEntity create(@RequestHeader(name = "Authorization") String token, @RequestBody Map<String,String> body){
-        jwtService.decodeJwt(token);
-        int userId = jwtService.getIdFromToken();
-
-        int sheetId = Integer.parseInt(body.get("sheetId"));
-        try{
-            PlayedSheet playedSheet = new PlayedSheet(sheetId,userId);
-            playedSheetRepository.save(playedSheet);
-            return ResponseEntity.ok(playedSheet);
-        }catch(Exception e){
-            GeneralException generalException = new GeneralException("Oeps, er gaat iets fout");
-            String json = gson.toJson(generalException);
-            return new ResponseEntity(json, HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @DeleteMapping("/played")
-    public ResponseEntity delete(@RequestHeader(name = "Authorization") String token, @RequestBody Map<String,String> body){
-        jwtService.decodeJwt(token);
-        int userId = jwtService.getIdFromToken();
-        int sheetId = Integer.parseInt(body.get("sheetId"));
-
-        try{
-            playedSheetRepository.deleteByUserIdAndSheetMusicId(userId,sheetId);
-            return ResponseEntity.ok("Deleted");
-        }catch(Exception e){
-            GeneralException generalException = new GeneralException("Oeps, er gaat iets fout");
-            String json = gson.toJson(generalException);
-            return new ResponseEntity(json, HttpStatus.BAD_REQUEST);
+            GeneralException ex = new GeneralException("Oeps, er gaat iets fout");
+            String jsonString = gson.toJson(ex);
+            return new ResponseEntity<>(jsonString,HttpStatus.BAD_REQUEST);
         }
     }
 }

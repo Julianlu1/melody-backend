@@ -1,10 +1,14 @@
 package server.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="sheet_music")
@@ -37,6 +41,11 @@ public class SheetMusic {
 //    @Lob
 //    @Type(type="org.hibernate.type.BinaryType")
     private String pdf;
+
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "sheetMusic")
+    Set<PlayedSheetEntity> playedSheetEntities;
 
     public SheetMusic() {
     }
@@ -107,5 +116,13 @@ public class SheetMusic {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public Set<PlayedSheetEntity> getPlayedSheetEntities() {
+        return playedSheetEntities;
+    }
+
+    public void setPlayedSheetEntities(Set<PlayedSheetEntity> playedSheetEntities) {
+        this.playedSheetEntities = playedSheetEntities;
     }
 }

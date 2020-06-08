@@ -11,9 +11,6 @@ public class Comment {
     @Column(name = "id")
     private int id;
 
-//    @Column(name = "user_id")
-//    private int userId;
-
     @ManyToOne
     private User user;
 //

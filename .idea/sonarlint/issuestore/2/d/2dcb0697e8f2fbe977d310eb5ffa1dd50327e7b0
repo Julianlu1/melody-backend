@@ -1,0 +1,6 @@
+
+squid:S1488F"cImmediately return this expression instead of assigning it to the temporary variable "sheetMusics".(†Ö†Ç8³’ûÀš.
+tsquid:UselessImportCheck"DRemove this unused import 'org.springframework.http.ResponseEntity'.(¶¯ø¦úÿÿÿÿ8Ğ¤•ş¨.
+„squid:S1192/"aDefine a constant instead of duplicating this literal "/src/main/webapp/WEB-INF/images/" 3 times.(Ã¸Î²úÿÿÿÿ8æ¾Ó¸š.
+_squid:UselessImportCheck"/Remove this unused import 'java.util.Optional'.(¨˜ëİüÿÿÿÿ8‘•Ó·š.
+usquid:S001179"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ğ½®©ÿÿÿÿÿ8µ°Ğ¾¤.
