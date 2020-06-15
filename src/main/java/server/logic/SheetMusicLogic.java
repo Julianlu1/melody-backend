@@ -16,6 +16,7 @@ import server.repository.UserRepository;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +37,7 @@ public class SheetMusicLogic {
     @Autowired
     FileService fileService;
 
+    private static final List<String> contentTypes = Arrays.asList("application/pdf");
 
     public List<SheetMusic> findAll(){
         return sheetMusicRepository.findAll();
@@ -46,25 +48,34 @@ public class SheetMusicLogic {
     }
 
     public SheetMusic addSheetMusic(String title, String componist, String key, String fileName, MultipartFile file, Instrument instrument) throws IOException {
-        // Aanmaken
-        SheetMusic sheetMusic = new SheetMusic(title,componist,key,fileName,instrument);
+        String fileContentType = file.getContentType();
 
-        // Bestand opslaan op server
-        String path = new File(".").getCanonicalPath() + "/src/main/webapp/WEB-INF/images/";
-        fileService.uploadFile(file,path);
+        if(fileContentType.equals("application/pdf")){
+            // Aanmaken
+            SheetMusic sheetMusic = new SheetMusic(title,componist,key,fileName,instrument);
+            // Bestand opslaan op server
+            String path = new File(".").getCanonicalPath() + "/src/main/webapp/WEB-INF/images/";
+            fileService.uploadFile(file,path);
 
-        // Sheetmusic toevoegen aan database
-        sheetMusicRepository.save(sheetMusic);
+            // Sheetmusic toevoegen aan database
+            sheetMusicRepository.save(sheetMusic);
 
-        // Returnen
-        return sheetMusic;
+            // Returnen
+            return sheetMusic;
+        }
+        return null;
     }
 
     public List<SheetMusic> findSheetMusicByFilter(String componist, String key, Integer instrument_id){
 
-        
-        Instrument instrument = instrumentRepository.findById(instrument_id).orElse(null);
-        SheetMusic sheetMusic = new SheetMusic(componist,key,instrument);
+        SheetMusic sheetMusic;
+        if(instrument_id!=null){
+            Instrument instrument = instrumentRepository.findById(instrument_id).orElse(null);
+            sheetMusic = new SheetMusic(componist,key,instrument);
+        }else{
+            sheetMusic = new SheetMusic(componist,key);
+        }
+
 
         Example<SheetMusic> employeeExample = Example.of(sheetMusic, ExampleMatcher.matching()
                 .withIgnorePaths("id")

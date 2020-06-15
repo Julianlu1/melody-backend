@@ -85,11 +85,14 @@ public class SheetMusicController {
 
     @PostMapping(value = "/sheetmusic")
     public ResponseEntity create(@RequestParam("file") MultipartFile file, @RequestParam("title") String title, @RequestParam("componist") String componist, @RequestParam("key") String key, @RequestParam("instrument_id") int instrument_id) throws IOException {
-
         try{
             Instrument instrument = instrumentLogic.findById(instrument_id);
             SheetMusic sheetMusic = sheetMusicLogic.addSheetMusic(title,componist,key,file.getOriginalFilename(),file,instrument);
-            return ResponseEntity.ok(sheetMusic);
+            if(sheetMusic != null){
+                return ResponseEntity.ok(sheetMusic);
+            }else{
+                return new ResponseEntity("Verkeerd bestandstype",HttpStatus.BAD_REQUEST);
+            }
         }catch(Exception e){
             GeneralException ex = new GeneralException("Oeps, er gaat iets fout");
             String jsonString = gson.toJson(ex);

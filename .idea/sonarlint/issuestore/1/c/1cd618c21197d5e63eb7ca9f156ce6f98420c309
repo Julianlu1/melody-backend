@@ -1,3 +1,6 @@
 
-[squid:UselessImportCheck"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8¿ˆ§È .
-[squid:UselessImportCheck"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8¿ˆ§È .
+[squid:UselessImportCheck"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8¿ËÔš©.
+squid:UselessImportCheck"ORemove this unused import 'com.fasterxml.jackson.annotation.JsonBackReference'.(»Ôœ¿ıÿÿÿÿ8º®›©.
+[squid:UselessImportCheck	"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8¿ËÔš©.
+ssquid:UselessImportCheck"HRemove this unused import 'com.fasterxml.jackson.annotation.JsonIgnore'.(ş‘‹„8¿ËÔš©.
+}squid:UselessImportCheck"RRemove this unused import 'com.fasterxml.jackson.annotation.JsonIgnoreProperties'.(ô’ˆî8Ì°¶›©.

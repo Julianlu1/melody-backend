@@ -81,6 +81,8 @@ public class CommentControllerIntegrationTest {
         body.put("description","Goede muziek");
         body.put("score","10.0");
 
+
+
         lenient().when(sheetMusicLogic.findById(1)).thenReturn(sheetMusic); // Return sheetmusic als findbyid is uitgevoerd
         lenient().when(userLogic.findById(0)).thenReturn(user); // Return user wanneer findbyid is uitgevoerd
         lenient().when(commentLogic.AddComment(sheetMusic,user,"Goede muziek",10.0)).thenReturn(comment); // Return comment wanneer findbyid is uitgevoerd
@@ -93,6 +95,16 @@ public class CommentControllerIntegrationTest {
         assertEquals(200,status.value());
     }
 
+    @Test
+    public void addCommentWrongInput(){
+        body = new HashMap<>();
+        body.put("sheetId","1");
+        body.put("description","Goede muziek");
+        body.put("score","abcdefg");
+        ResponseEntity response = commentController.create(this.token,body);
+        HttpStatus status = response.getStatusCode();
+        assertEquals(400,status.value());
+    }
 
 
 

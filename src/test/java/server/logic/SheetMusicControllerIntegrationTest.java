@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import com.google.gson.Gson;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
@@ -68,6 +69,8 @@ public class SheetMusicControllerIntegrationTest {
     @Mock
     private InstrumentLogic instrumentLogic;
 
+
+
     private MockMultipartFile mockFile;
 
     @Before
@@ -76,8 +79,8 @@ public class SheetMusicControllerIntegrationTest {
 
         mockFile =
                 new MockMultipartFile(
-                        "file",
-                        "contract.pdf",
+                        "newTitel",
+                        "newTitel.pdf",
                         MediaType.APPLICATION_PDF_VALUE,
                         "<<pdf data>>".getBytes(StandardCharsets.UTF_8));
 
@@ -91,7 +94,7 @@ public class SheetMusicControllerIntegrationTest {
         lenient().when(sheetMusicLogic.findById(1)).thenReturn(sheetMusic);
 
         // Wanneer addSheetmusic wordt uitgevoerd, returned hij newSheetMusic
-        lenient().when(sheetMusicLogic.addSheetMusic("newTitel","newComponist","c","newTitel",mockFile,instrument)).thenReturn(newSheetMusic);
+        lenient().when(sheetMusicLogic.addSheetMusic("newTitel","newComponist","c","newTitel.pdf",mockFile,instrument)).thenReturn(newSheetMusic);
         lenient().when(instrumentLogic.findById(1)).thenReturn(instrument);
 
         // Wanneer er gefilterd wordt op piano, return dit
@@ -125,9 +128,22 @@ public class SheetMusicControllerIntegrationTest {
 
     @Test
     public void addSheetMusic() throws IOException {
+        // "newTitel","newComponist","c","newTitel",mockFile,instrument
         ResponseEntity response = sheetMusicController.create(mockFile,"newTitel","newComponist","c",1);
         HttpStatus status = response.getStatusCode();
         assertEquals(200,status.value());
+    }
+
+    @Test
+    public void addSheetMusicWrongFileType() throws IOException {
+    MockMultipartFile mockMultipartFile = new MockMultipartFile(
+            "file",
+            "photo.jpeg",
+            MediaType.IMAGE_JPEG_VALUE,
+            "<<image>>".getBytes(StandardCharsets.UTF_8));
+             ResponseEntity response = sheetMusicController.create(mockMultipartFile,"FouteFile","TestComponist","c",1);
+        HttpStatus status = response.getStatusCode();
+        assertEquals(400,status.value());
     }
 
     @Test

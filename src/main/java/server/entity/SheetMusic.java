@@ -58,6 +58,11 @@ public class SheetMusic {
         this.instrument = instrument;
     }
 
+    public SheetMusic(String componist, String key) {
+        this.componist = componist;
+        this.key = key;
+    }
+
     public SheetMusic(String title, String componist, String key, String pdf, Instrument instrument) {
         this.title = title;
         this.componist = componist;
