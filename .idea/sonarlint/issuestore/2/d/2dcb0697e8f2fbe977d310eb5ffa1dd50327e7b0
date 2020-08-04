@@ -1,9 +1,9 @@
 
-squid:S1488R"cImmediately return this expression instead of assigning it to the temporary variable "sheetMusics".(†Ö†Ç8‡ÒˆÉ©.
 _squid:UselessImportCheck"/Remove this unused import 'java.util.Optional'.(¨˜ëİüÿÿÿÿ8‡ÒˆÉ©.
-usquid:S00117E"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ğ½®©ÿÿÿÿÿ8‡ÒˆÉ©.
-tsquid:UselessImportCheck"DRemove this unused import 'org.springframework.http.ResponseEntity'.(¶¯ø¦úÿÿÿÿ8Úô˜©.
-xsquid:UselessImportCheck"MRemove this unused import 'org.springframework.security.core.Authentication'.(ñıÓ“8Úô˜©.
 „squid:S11929"aDefine a constant instead of duplicating this literal "/src/main/webapp/WEB-INF/images/" 3 times.(Ã¸Î²úÿÿÿÿ8‡ÒˆÉ©.
-‡squid:UselessImportCheck"\Remove this unused import 'org.springframework.security.core.context.SecurityContextHolder'.(ŒÄæë8Úô˜©.
+usquid:S00117E"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ğ½®©ÿÿÿÿÿ8‡ÒˆÉ©.
+squid:S1488W"cImmediately return this expression instead of assigning it to the temporary variable "sheetMusics".(†Ö†Ç8‡ÒˆÉ©.
 Ssquid:S1068("0Remove this unused "contentTypes" private field.(ô–Šóúÿÿÿÿ8Üÿ´É©.
+‡squid:UselessImportCheck"\Remove this unused import 'org.springframework.security.core.context.SecurityContextHolder'.(ŒÄæë8Úô˜©.
+xsquid:UselessImportCheck"MRemove this unused import 'org.springframework.security.core.Authentication'.(ñıÓ“8Úô˜©.
+tsquid:UselessImportCheck"DRemove this unused import 'org.springframework.http.ResponseEntity'.(¶¯ø¦úÿÿÿÿ8Úô˜©.

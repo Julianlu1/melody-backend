@@ -1,6 +1,6 @@
 
-nsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ª‘…Ÿøÿÿÿÿ8ñÍš©.
-ssquid:UselessImportCheck"HRemove this unused import 'com.fasterxml.jackson.annotation.JsonIgnore'.(þ‘‹„8çªÔš©.
-lsquid:S00100M"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(™ èp8ñÍš©.
-}squid:UselessImportCheck"RRemove this unused import 'com.fasterxml.jackson.annotation.JsonManagedReference'.(Æ˜µ8ñÍš©.
 isquid:CommentedOutCodeLine!"<This block of commented-out lines of code should be removed.(‘ùÍ£8ñÍš©.
+}squid:UselessImportCheck"RRemove this unused import 'com.fasterxml.jackson.annotation.JsonManagedReference'.(Æ˜µ8ñÍš©.
+nsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ª‘…Ÿøÿÿÿÿ8ñÍš©.
+lsquid:S00100R"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(™ èp8ñÍš©.
+ssquid:UselessImportCheck"HRemove this unused import 'com.fasterxml.jackson.annotation.JsonIgnore'.(þ‘‹„8çªÔš©.
